@@ -87,6 +87,7 @@ position = Vector2(569, -483)
 texture = SubResource("ViewportTexture_0wfyh")
 
 [node name="SubViewport2" type="SubViewport" parent="." unique_id=522621952]
+metadata/visual = true
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport2" unique_id=805793273]
 transform = Transform3D(0.90434045, -0.42223722, 0.062323123, 0.28240156, 0.7014338, 0.6544004, -0.3200278, -0.5742006, 0.7535753, 1.4734764, 3.035638, 4.0289392)

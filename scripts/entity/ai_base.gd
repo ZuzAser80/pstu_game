@@ -3,8 +3,9 @@ extends Node
 class_name AI_Base
 
 @export var hostility_level : int;
+@export var aggravation : int;
 @export var movement_speed : float;
-@export var starting_locations : Array[Room];
+
 @export var current_room : Room;
 @export var detection_radius : float;
 @export var anim : AnimationPlayer;
@@ -14,6 +15,7 @@ class_name AI_Base
 
 var target_room : Room;
 var physics_delta : float;
+var should_move : bool = false;
 
 signal on_reached_target;
 
@@ -28,9 +30,11 @@ func _move_to_target_room() -> void:
 	nav_agent.target_reached.connect(_on_move_completion);
 
 func _on_move_completion() -> void:
+	should_move = false;
 	on_reached_target.emit();	
 
 func _physics_process(delta: float) -> void:
+	if not should_move: return
 	physics_delta = delta;
 	var next_path_position: Vector3 = nav_agent.get_next_path_position()
 	var new_velocity: Vector3 = nav_agent.global_position.direction_to(next_path_position) * movement_speed * (0.2 * hostility_level);

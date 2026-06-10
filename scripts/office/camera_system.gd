@@ -1,6 +1,7 @@
 extends Node
 
 @export var cameras : Array[SubViewport];
+@export var no_visual : Texture2D
 @export var display : Sprite3D
 @export var close_up : Sprite2D
 
@@ -12,10 +13,14 @@ func _ready() -> void:
 	pass;
 
 func _refresh() -> void:
-	var viewport_texture = cameras[currentIndex].get_texture();
-	close_up.texture = viewport_texture;	
-	display.texture = viewport_texture;
-	pass
+	if cameras[currentIndex].get_meta("visual", false):
+		var viewport_texture = cameras[currentIndex].get_texture();
+		close_up.texture = viewport_texture;	
+		display.texture = viewport_texture;
+	else:
+		close_up.texture = no_visual;
+		display.texture = no_visual;
+	
 
 func _move_to_cam(index: int) -> void:
 	currentIndex = index;

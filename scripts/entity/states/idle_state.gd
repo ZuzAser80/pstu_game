@@ -11,8 +11,13 @@ func enter(_char_reference : AI_Base):
 func try_move() -> void:
 	if (randi_range(0, 100) * ai_base.hostility_level >= ai_base.hostility_level * 10):
 		print("random check success, moving.")
-	#todo: add camera breaking and retreat???
-	transitioned.emit("advance");
+		transitioned.emit("AdvanceState");
+	# TODO: add camera breaking and retreat???
+	# TODO: make proper formulas, tired of magic numbers already ngl
+	if ai_base.aggravation * ai_base.hostility_level >= 50:
+		print("aggravated, breaking")
+		transitioned.emit("AttackState");
 
 func exit():
+	print("idle exited")
 	ai_base.idle_timer.stop();

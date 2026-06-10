@@ -4,7 +4,7 @@ class_name Room
 
 @export var spots : Array[Node3D];
 @export var neighbors : Array[Room];
-@export var cameras : Array;
+@export var targets : Array[Breakable];
 
 @export var distance_to_office : int;
 
