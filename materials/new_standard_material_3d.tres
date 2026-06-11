@@ -1,8 +1,5 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://dct1v2aiicele"]
 
 [resource]
-blend_mode = 4
-cull_mode = 1
-shading_mode = 0
-grow = true
+albedo_color = Color(1.1852197e-06, 0.31662995, 4.813075e-08, 1)
 grow_amount = 0.03

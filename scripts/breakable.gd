@@ -4,6 +4,8 @@ enum BreakableType { Camera, Radio };
 
 @export var type : BreakableType;
 
+signal on_broken
+
 func _break() -> void:
 	match type:
 		BreakableType.Camera:
@@ -13,3 +15,4 @@ func _break() -> void:
 				set_meta("audio", false);	
 		BreakableType.Radio:
 			set_meta("radius", get_meta("radius") * 0.8);
+	on_broken.emit()

@@ -1,9 +1,9 @@
 class_name StateMachine extends Node
 
 @export var initial_state : State = null;
-@export var states : Array[State];
+#@export var states : Array[State];
 
-@onready var current_state : State;
+@onready var current_state : State = get_node("IdleState");
 @export var ai_base : AI_Base;
 
 var last_state;

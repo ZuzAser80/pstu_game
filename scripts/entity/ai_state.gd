@@ -2,6 +2,12 @@ extends Node
 
 class_name State;
 
+const IDLE = "IdleState"
+const ATTACK = "AttackState"
+const ADVANCE = "AdvanceState"
+const CHASE = "ChaseState"
+const RETREAT = "RetreatState"
+
 var ai_base : AI_Base;
 
 # Called when the node enters the scene tree for the first time.

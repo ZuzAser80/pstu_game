@@ -3,7 +3,21 @@
 [ext_resource type="Material" uid="uid://byr736ycqbs81" path="res://materials/simple_outline.tres" id="1_jyhfs"]
 [ext_resource type="Script" uid="uid://db82qfoqrxidm" path="res://scripts/highlight_manager.gd" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://b2kfpk05e4ucs" path="res://scripts/office/office_cam.gd" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://bh7q6bb12tdsl" path="res://scripts/breakable.gd" id="3_a8y0u"]
 [ext_resource type="Script" uid="uid://deiw3155qusc4" path="res://scripts/office/camera_system.gd" id="3_sugp2"]
+[ext_resource type="Script" uid="uid://0f752tg6ys4m" path="res://scripts/entity/ai_state_machine.gd" id="5_tefeu"]
+[ext_resource type="Script" uid="uid://cq8lujpb4pnwc" path="res://scripts/entity/states/idle_state.gd" id="6_tefeu"]
+[ext_resource type="Script" uid="uid://c58oxvpe0vxcf" path="res://scripts/entity/states/advance_state.gd" id="7_o6xl0"]
+[ext_resource type="Script" uid="uid://c5fektthy474" path="res://scripts/entity/ai_base.gd" id="8_tipki"]
+[ext_resource type="Script" uid="uid://x4dwkb8dobyg" path="res://scripts/entity/room.gd" id="9_85g3d"]
+[ext_resource type="Material" uid="uid://dixh2yisiw34v" path="res://materials/red.tres" id="10_choun"]
+[ext_resource type="Material" uid="uid://u6yxwukpiebw" path="res://materials/green.tres" id="11_ya4ey"]
+[ext_resource type="Material" uid="uid://dct1v2aiicele" path="res://materials/new_standard_material_3d.tres" id="12_eb6dy"]
+[ext_resource type="Script" uid="uid://byfxivg2ygl03" path="res://scripts/entity/states/attack_state.gd" id="12_trceg"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_ya4ey"]
+vertices = PackedVector3Array(-9.628397, 0.48569483, -10.900717, -9.628397, 0.48569483, 10.849283, 9.621603, 0.48569483, 10.849283, 9.621603, 0.48569483, -10.900717)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 
 [sub_resource type="BoxMesh" id="BoxMesh_7dm0k"]
 
@@ -59,7 +73,11 @@ func _process(delta: float) -> void:
 
 [sub_resource type="SphereMesh" id="SphereMesh_tbgi4"]
 
-[sub_resource type="TorusMesh" id="TorusMesh_jyhfs"]
+[sub_resource type="BoxMesh" id="BoxMesh_choun"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ya4ey"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ya4ey"]
 
 [node name="Node3D" type="Node3D" unique_id=553121940]
 script = ExtResource("1_tefeu")
@@ -67,8 +85,12 @@ highlightables = Dictionary[NodePath, NodePath]({
 NodePath("Area3D"): NodePath("Area3D/CSGMesh3D2")
 })
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=1683152974]
-transform = Transform3D(20.260878, 0, 0, 0, 0.03641641, 0, 0, 0, 22.797735, 0.0020415783, 0.0039030313, -0.0018479824)
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1360022572]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, -1.1641532e-10)
+navigation_mesh = SubResource("NavigationMesh_ya4ey")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="NavigationRegion3D" unique_id=1683152974]
+transform = Transform3D(20.260878, 0, 0, 0, 0.03641641, 0, 0, 0, 22.797737, 0.0020415783, 0.0039030313, -0.0018479825)
 use_collision = true
 mesh = SubResource("BoxMesh_7dm0k")
 
@@ -87,14 +109,19 @@ position = Vector2(569, -483)
 texture = SubResource("ViewportTexture_0wfyh")
 
 [node name="SubViewport2" type="SubViewport" parent="." unique_id=522621952]
+script = ExtResource("3_a8y0u")
 metadata/visual = true
+metadata/audio = false
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport2" unique_id=805793273]
-transform = Transform3D(0.90434045, -0.42223722, 0.062323123, 0.28240156, 0.7014338, 0.6544004, -0.3200278, -0.5742006, 0.7535753, 1.4734764, 3.035638, 4.0289392)
+transform = Transform3D(0.90434045, -0.4222372, 0.062323157, 0.2824016, 0.7014339, 0.65440065, -0.32002786, -0.57420075, 0.7535753, 1.4734764, 3.035638, 4.0289392)
 current = true
 fov = 108.7
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=2145805378]
+script = ExtResource("3_a8y0u")
+metadata/visual = true
+metadata/audio = false
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport" unique_id=855703974]
 transform = Transform3D(-0.003245503, -0.6814647, 0.7318438, 0.2824016, 0.70143384, 0.65440047, -0.9592908, 0.20879771, 0.19017021, 7.188979, 3.035638, -2.9022303)
@@ -109,7 +136,7 @@ script = ExtResource("2_0wfyh")
 target_position = Vector3(0, 0, -10)
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1475930270]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24792838, 2.0287864, -3.131019)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24792838, 2.0287864, -13.379904)
 texture = SubResource("ViewportTexture_sugp2")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2140260495 node_paths=PackedStringArray("cameras", "display", "close_up")]
@@ -148,12 +175,71 @@ metadata/number = 1
 shape = SubResource("BoxShape3D_sugp2")
 debug_color = Color(0.9529412, 0.21960784, 0, 1)
 
-[node name="CSGMesh3D3" type="CSGMesh3D" parent="." unique_id=60930316]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.553595, 0.9304764, -2.392454)
-mesh = SubResource("TorusMesh_jyhfs")
+[node name="Room" type="Node" parent="." unique_id=1147975621 node_paths=PackedStringArray("spots", "neighbors")]
+script = ExtResource("9_85g3d")
+spots = [NodePath("MeshInstance3D")]
+neighbors = [NodePath("../Room2")]
+distance_to_office = 1
+metadata/_custom_type_script = "uid://x4dwkb8dobyg"
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="CSGMesh3D3" unique_id=90240748]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room" unique_id=18762810]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7135277, 0.9947376, -5.348722)
+material_override = ExtResource("10_choun")
+mesh = SubResource("BoxMesh_choun")
 
+[node name="Room2" type="Node" parent="." unique_id=1628226692 node_paths=PackedStringArray("spots", "neighbors", "targets")]
+script = ExtResource("9_85g3d")
+spots = [NodePath("MeshInstance3D")]
+neighbors = [NodePath("../Room")]
+targets = [NodePath("../SubViewport")]
+metadata/_custom_type_script = "uid://x4dwkb8dobyg"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room2" unique_id=370640958]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2811708, 0.9947376, -5.348722)
+material_override = ExtResource("11_ya4ey")
+mesh = SubResource("BoxMesh_choun")
+
+[node name="AI_Base" type="CharacterBody3D" parent="." unique_id=600286131 node_paths=PackedStringArray("current_room")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2150507, 1.0995555, -4.8030257)
+script = ExtResource("8_tipki")
+hostility_level = 20
+aggravation = 20
+movement_speed = 1.0
+current_room = NodePath("../Room2")
+metadata/_custom_type_script = "uid://c5fektthy474"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AI_Base" unique_id=426676235]
+shape = SubResource("CapsuleShape3D_ya4ey")
+
+[node name="IdleTimer" type="Timer" parent="AI_Base" unique_id=2010737195]
+wait_time = 2.0
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="AI_Base" unique_id=90240748]
+
+[node name="StateMachine" type="Node" parent="AI_Base/NavigationAgent3D" unique_id=2141207203 node_paths=PackedStringArray("initial_state", "ai_base")]
+script = ExtResource("5_tefeu")
+initial_state = NodePath("IdleState")
+ai_base = NodePath("../..")
+metadata/_custom_type_script = "uid://0f752tg6ys4m"
+
+[node name="IdleState" type="Node" parent="AI_Base/NavigationAgent3D/StateMachine" unique_id=712540720]
+script = ExtResource("6_tefeu")
+metadata/_custom_type_script = "uid://cq8lujpb4pnwc"
+
+[node name="AdvanceState" type="Node" parent="AI_Base/NavigationAgent3D/StateMachine" unique_id=1506115542]
+script = ExtResource("7_o6xl0")
+metadata/_custom_type_script = "uid://c58oxvpe0vxcf"
+
+[node name="AttackState" type="Node" parent="AI_Base/NavigationAgent3D/StateMachine" unique_id=351598121]
+script = ExtResource("12_trceg")
+metadata/_custom_type_script = "uid://byfxivg2ygl03"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AI_Base" unique_id=283592367]
+mesh = SubResource("CapsuleMesh_ya4ey")
+surface_material_override/0 = ExtResource("12_eb6dy")
+
+[connection signal="on_broken" from="SubViewport2" to="DirectionalLight3D" method="_refresh"]
+[connection signal="on_broken" from="SubViewport" to="DirectionalLight3D" method="_refresh"]
 [connection signal="clicked_closeup" from="PlayerCam" to="DirectionalLight3D" method="_on_player_cam_clicked_closeup"]
 [connection signal="on_hover_end" from="PlayerCam" to="." method="_turn_off"]
 [connection signal="on_hover_start" from="PlayerCam" to="." method="_turn_on"]
