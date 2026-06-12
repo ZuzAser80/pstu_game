@@ -2,5 +2,5 @@ extends Node
 
 signal on_interact;
 
-func _on_interact() -> void:
+func interact() -> void:
 	on_interact.emit();

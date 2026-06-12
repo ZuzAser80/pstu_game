@@ -6,7 +6,7 @@ const IDLE = "IdleState"
 const ATTACK = "AttackState"
 const ADVANCE = "AdvanceState"
 const CHASE = "ChaseState"
-const RETREAT = "RetreatState"
+const INVESTIGATE = "InvestigateState"
 
 var ai_base : AI_Base;
 

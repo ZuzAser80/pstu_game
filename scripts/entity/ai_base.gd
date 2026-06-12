@@ -5,6 +5,7 @@ class_name AI_Base
 @export var hostility_level : int;
 @export var aggravation : int;
 @export var movement_speed : float;
+@export var movement_aggravation_multiplier : float = 1;
 
 @export var current_room : Room;
 @export var detection_radius : float;
@@ -16,6 +17,7 @@ class_name AI_Base
 var target_room : Room;
 var physics_delta : float;
 var should_move : bool = false;
+var retreating : bool = false;
 
 signal on_reached_target;
 

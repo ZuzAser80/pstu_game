@@ -1,6 +1,6 @@
 class_name Breakable extends Node
 
-enum BreakableType { Camera, Radio };
+enum BreakableType { Camera, Radio, Door };
 
 @export var type : BreakableType;
 
@@ -15,4 +15,6 @@ func _break() -> void:
 				set_meta("audio", false);	
 		BreakableType.Radio:
 			set_meta("radius", get_meta("radius") * 0.8);
+		BreakableType.Door:
+			set_meta("durability", get_meta("durability") - 1);
 	on_broken.emit()

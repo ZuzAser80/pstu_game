@@ -8,7 +8,6 @@ extends Node
 var close_up_open := false
 var currentIndex := 0;
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass;
 

@@ -1,4 +1,4 @@
-extends Node
+class_name HighlightManager extends Node
 
 @export var highlightables : Dictionary[NodePath, NodePath]
 

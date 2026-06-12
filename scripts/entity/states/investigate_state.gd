@@ -1,4 +1,4 @@
-extends State
+class_name InvestigateState extends State
 
 
 # Called when the node enters the scene tree for the first time.
