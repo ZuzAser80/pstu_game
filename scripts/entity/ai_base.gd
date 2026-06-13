@@ -18,6 +18,7 @@ var target_room : Room;
 var physics_delta : float;
 var should_move : bool = false;
 var retreating : bool = false;
+var target_breakable : Breakable;
 
 signal on_reached_target;
 
@@ -25,7 +26,8 @@ func _move_to_target_room() -> void:
 	if target_room == null: return
 	print("Moving from:", current_room.name, "to:", target_room.name)
 	nav_agent.target_position = target_room.spots.pick_random().global_position;
-	nav_agent.target_reached.connect(_on_move_completion);
+	if not nav_agent.target_reached.is_connected(_on_move_completion):
+		nav_agent.target_reached.connect(_on_move_completion);
 
 func _on_move_completion() -> void:
 	should_move = false;

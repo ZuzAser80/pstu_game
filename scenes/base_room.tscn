@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bi32okftrh2ht"]
+
+[ext_resource type="Script" uid="uid://x4dwkb8dobyg" path="res://scripts/entity/room.gd" id="1_ont3e"]
+[ext_resource type="Material" uid="uid://dixh2yisiw34v" path="res://materials/red.tres" id="2_1tp4b"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ont3e"]
+
+[node name="Room" type="Node3D" unique_id=34470668 node_paths=PackedStringArray("spots")]
+script = ExtResource("1_ont3e")
+spots = [NodePath("MeshInstance3D")]
+metadata/_custom_type_script = "uid://x4dwkb8dobyg"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2050017750]
+mesh = SubResource("BoxMesh_ont3e")
+surface_material_override/0 = ExtResource("2_1tp4b")

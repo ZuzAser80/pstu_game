@@ -1,11 +1,18 @@
 class_name InvestigateState extends State
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func enter(_char_reference : AI_Base):
+	super.enter(_char_reference);
+	if ai_base.target_room == null:
+		transitioned.emit(IDLE)
+		return
+	ai_base.should_move = true
+	ai_base._move_to_target_room()
+	ai_base.on_reached_target.connect(_stop)
 
+func _stop() -> void:
+	transitioned.emit(IDLE)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func exit() -> void:
+	if ai_base.on_reached_target.is_connected(_stop):
+		ai_base.on_reached_target.disconnect(_stop)

@@ -11,7 +11,7 @@ func _select_attack_target() -> void:
 	var target = ai_base.current_room.targets.pick_random()
 	if target == null: return
 	print("selected:", target.name)
-	if target.BreakableType == Breakable.BreakableType.Door:
+	if target.type == Breakable.BreakableType.Door:
 		print("door hit, should transition into chase but slower idk")
 	target._break()
 	if randi_range(0, 2) == 1:

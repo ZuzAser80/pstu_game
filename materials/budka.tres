@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://s1jkwmtdsu1p"]
+
+[ext_resource type="Texture2D" uid="uid://bd1h1jgdfo860" path="res://materials/budka.png" id="1_78msn"]
+
+[resource]
+albedo_texture = ExtResource("1_78msn")
+texture_filter = 0
