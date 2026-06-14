@@ -192,12 +192,12 @@ mesh = SubResource("TubeTrailMesh_0ld40")
 surface_material_override/0 = ExtResource("1_jyhfs")
 
 [node name="AI_Base" type="CharacterBody3D" parent="." unique_id=600286131 node_paths=PackedStringArray("current_room")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2150507, 1.0995555, -4.8030257)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.161509, 0.779366, -6.535975)
 script = ExtResource("8_tipki")
 hostility_level = 20
 aggravation = 20
 movement_speed = 1.0
-current_room = NodePath("../Room")
+current_room = NodePath("../Room2")
 metadata/_custom_type_script = "uid://c5fektthy474"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AI_Base" unique_id=426676235]
@@ -207,7 +207,6 @@ shape = SubResource("CapsuleShape3D_ya4ey")
 wait_time = 2.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="AI_Base" unique_id=90240748]
-path_desired_distance = 0.1
 
 [node name="StateMachine" type="Node" parent="AI_Base/NavigationAgent3D" unique_id=2141207203 node_paths=PackedStringArray("initial_state", "ai_base")]
 script = ExtResource("5_tefeu")
@@ -260,6 +259,7 @@ mesh = SubResource("CapsuleMesh_dp3eg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0134294, 1.1583791, -7.1861057)
 spots = [NodePath("MeshInstance3D"), NodePath("Node3D")]
 neighbors = [NodePath("../Room2")]
+distance_to_office = 1
 
 [node name="Distraction" type="Node3D" parent="Room" unique_id=1670932013 node_paths=PackedStringArray("room")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.057926, 0, -1.4950161)
@@ -274,6 +274,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8935397, 0, 1.792799)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.977679, 1.1583791, -7.1861057)
 spots = [NodePath("MeshInstance3D"), NodePath("Node3D")]
 neighbors = [NodePath("../Room")]
+distance_to_office = 2
 
 [node name="Distraction" type="Node3D" parent="Room2" unique_id=1484613208 node_paths=PackedStringArray("room")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.057926, 0, -1.4950161)

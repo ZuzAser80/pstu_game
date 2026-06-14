@@ -15,7 +15,6 @@ func _select_room() -> void:
 	if neighbors.is_empty():
 		neighbors = ai_base.current_room.get_all_neighbors()
 		ai_base.aggravation += 1
-		return
 	ai_base.target_room = neighbors.pick_random();
 
 func _stop() -> void:
