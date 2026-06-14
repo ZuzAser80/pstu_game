@@ -1,5 +1,8 @@
 class_name AdvanceState extends State
 
+func _ready() -> void:
+	state_name = ADVANCE;
+
 func enter(_char_reference : AI_Base):
 	super.enter(_char_reference)
 	print("advance entered")

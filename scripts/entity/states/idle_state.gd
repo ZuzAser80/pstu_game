@@ -1,6 +1,8 @@
 class_name IdleState extends State
 
-# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	state_name = IDLE;
+
 func enter(_char_reference : AI_Base):
 	super.enter(_char_reference)
 	print("idle entered")

@@ -2,11 +2,13 @@ extends Node
 
 class_name State;
 
-const IDLE = "IdleState"
-const ATTACK = "AttackState"
-const ADVANCE = "AdvanceState"
-const CHASE = "ChaseState"
-const INVESTIGATE = "InvestigateState"
+static var IDLE = "IdleState"
+static var ATTACK = "AttackState"
+static var ADVANCE = "AdvanceState"
+static var CHASE = "ChaseState"
+static var INVESTIGATE = "InvestigateState"
+
+var state_name := "";
 
 var ai_base : AI_Base;
 

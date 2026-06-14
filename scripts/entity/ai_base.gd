@@ -9,10 +9,12 @@ class_name AI_Base
 
 @export var current_room : Room;
 @export var detection_radius : float;
+@export var detection_timer_wait : int;
 @export var anim : AnimationPlayer;
 
 @onready var idle_timer : Timer = $IdleTimer;
 @onready var nav_agent : NavigationAgent3D = $NavigationAgent3D;
+@onready var state_machine : StateMachine = $NavigationAgent3D/StateMachine;
 
 var target_room : Room;
 var physics_delta : float;

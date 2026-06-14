@@ -1,5 +1,8 @@
 class_name AttackState extends State
 
+func _ready() -> void:
+	state_name = ATTACK;
+
 func enter(_char_reference : AI_Base):
 	super.enter(_char_reference)
 	_select_attack_target()

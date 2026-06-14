@@ -1,5 +1,7 @@
 class_name InvestigateState extends State
 
+func _ready() -> void:
+	state_name = INVESTIGATE;
 
 func enter(_char_reference : AI_Base):
 	super.enter(_char_reference);
