@@ -1,6 +1,6 @@
 extends Node
 
-signal on_interact;
+signal on_interact(args: Dictionary)
 
-func interact() -> void:
-	on_interact.emit();
+func interact(args: Dictionary[String, Variant]) -> void:
+	on_interact.emit(args)

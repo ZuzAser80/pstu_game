@@ -14,10 +14,11 @@
 [ext_resource type="PackedScene" uid="uid://bi32okftrh2ht" path="res://scenes/base_room.tscn" id="9_0ld40"]
 [ext_resource type="Material" uid="uid://dct1v2aiicele" path="res://materials/new_standard_material_3d.tres" id="12_eb6dy"]
 [ext_resource type="Script" uid="uid://byfxivg2ygl03" path="res://scripts/entity/states/attack_state.gd" id="12_trceg"]
-[ext_resource type="Script" path="res://scripts/entity/states/investigate_state.gd" id="13_ivst"]
+[ext_resource type="Script" uid="uid://dael6201n34td" path="res://scripts/entity/states/investigate_state.gd" id="13_ivst"]
 [ext_resource type="Script" uid="uid://bx6ago02thqfp" path="res://scripts/freeroam/freeroam_controller.gd" id="15_jkv2x"]
 [ext_resource type="Script" uid="uid://dog8q1b40mg6l" path="res://scripts/freeroam/freeroam_cam.gd" id="16_jbj1t"]
 [ext_resource type="Script" uid="uid://cj6t3i7baijdq" path="res://scripts/misc/interactor.gd" id="17_muem4"]
+[ext_resource type="Script" uid="uid://cng5rv84le1jw" path="res://scripts/misc/distraction.gd" id="19_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://bxmjrv55khwxu" path="res://models/environment/budka.glb" id="20_gqmmt"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_ya4ey"]
@@ -55,6 +56,8 @@ viewport_path = NodePath("SubViewport")
 
 [sub_resource type="SphereMesh" id="SphereMesh_tbgi4"]
 
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_0ld40"]
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ya4ey"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ya4ey"]
@@ -66,7 +69,8 @@ viewport_path = NodePath("SubViewport")
 [node name="Node3D" type="Node3D" unique_id=553121940]
 script = ExtResource("1_tefeu")
 highlightables = Dictionary[NodePath, NodePath]({
-NodePath("Area3D"): NodePath("Area3D/CSGMesh3D2")
+NodePath("Area3D"): NodePath("Area3D/CSGMesh3D2"),
+NodePath("Area3D3"): NodePath("Area3D3/MeshInstance3D2")
 })
 
 [node name="GameModeManager" type="Node" parent="." unique_id=1711575424 node_paths=PackedStringArray("freeroam_controller", "office_controller")]
@@ -75,10 +79,11 @@ freeroam_controller = NodePath("../FreeroamController")
 office_controller = NodePath("../PlayerCam")
 metadata/_custom_type_script = "uid://7fnki0j8tex6"
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2140260495 node_paths=PackedStringArray("cameras", "display", "close_up")]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2140260495 node_paths=PackedStringArray("cameras", "radios", "display", "close_up")]
 transform = Transform3D(1, 0, 0, 0, 0.6789161, 0.73421586, 0, -0.73421586, 0.6789161, 0, 1.3558397, 0)
 script = ExtResource("3_sugp2")
 cameras = [NodePath("../SubViewport"), NodePath("../SubViewport2")]
+radios = [NodePath("../Room/Distraction")]
 display = NodePath("../Sprite3D")
 close_up = NodePath("../Sprite2D")
 
@@ -131,7 +136,6 @@ script = ExtResource("2_0wfyh")
 
 [node name="Interactor" type="Node3D" parent="PlayerCam" unique_id=843864897]
 script = ExtResource("17_muem4")
-handle_clicks = false
 metadata/_custom_type_script = "uid://cj6t3i7baijdq"
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1475930270]
@@ -139,7 +143,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24792838, 2.0287864, -13.37
 texture = SubResource("ViewportTexture_sugp2")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=411017893]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47539008, 1.494439, -1.2940558)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47539008, 2.102591, -1.2940558)
 collision_layer = 3
 collision_mask = 524291
 script = ExtResource("8_0ld40")
@@ -158,14 +162,34 @@ mesh = SubResource("SphereMesh_tbgi4")
 material = ExtResource("1_jyhfs")
 
 [node name="Area3D2" type="Area3D" parent="." unique_id=2080415148]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8810233, 1.494439, -1.2940558)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8810233, 2.102591, -1.2940558)
 collision_layer = 3
 collision_mask = 524291
+script = ExtResource("8_0ld40")
 metadata/number = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2" unique_id=1779286778]
 shape = SubResource("BoxShape3D_sugp2")
 debug_color = Color(0.9529412, 0.21960784, 0, 1)
+
+[node name="Area3D3" type="Area3D" parent="." unique_id=1078265946]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.41828692, 0.92547417, -1.2940558)
+collision_layer = 3
+collision_mask = 524291
+script = ExtResource("8_0ld40")
+metadata/number = 1
+metadata/radio_number = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D3" unique_id=1867881485]
+shape = SubResource("BoxShape3D_sugp2")
+debug_color = Color(0.9529412, 0.21960784, 0, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D3" unique_id=916728912]
+mesh = SubResource("TubeTrailMesh_0ld40")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Area3D3" unique_id=1946661520]
+mesh = SubResource("TubeTrailMesh_0ld40")
+surface_material_override/0 = ExtResource("1_jyhfs")
 
 [node name="AI_Base" type="CharacterBody3D" parent="." unique_id=600286131 node_paths=PackedStringArray("current_room")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2150507, 1.0995555, -4.8030257)
@@ -203,7 +227,7 @@ metadata/_custom_type_script = "uid://c58oxvpe0vxcf"
 script = ExtResource("12_trceg")
 metadata/_custom_type_script = "uid://byfxivg2ygl03"
 
-[node name="InvestigateState" type="Node" parent="AI_Base/NavigationAgent3D/StateMachine"]
+[node name="InvestigateState" type="Node" parent="AI_Base/NavigationAgent3D/StateMachine" unique_id=1139340982]
 script = ExtResource("13_ivst")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="AI_Base" unique_id=283592367]
@@ -232,8 +256,33 @@ shape = SubResource("CapsuleShape3D_muem4")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="FreeroamController" unique_id=1202031912]
 mesh = SubResource("CapsuleMesh_dp3eg")
 
-[node name="Room" parent="." unique_id=34470668 instance=ExtResource("9_0ld40")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.240998, 1.1583791, -7.1861057)
+[node name="Room" parent="." unique_id=34470668 node_paths=PackedStringArray("spots", "neighbors") instance=ExtResource("9_0ld40")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0134294, 1.1583791, -7.1861057)
+spots = [NodePath("MeshInstance3D"), NodePath("Node3D")]
+neighbors = [NodePath("../Room2")]
+
+[node name="Distraction" type="Node3D" parent="Room" unique_id=1670932013 node_paths=PackedStringArray("room")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.057926, 0, -1.4950161)
+script = ExtResource("19_gqmmt")
+room = NodePath("..")
+metadata/_custom_type_script = "uid://cng5rv84le1jw"
+
+[node name="Node3D" type="Node3D" parent="Room" unique_id=1713919026]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8935397, 0, 1.792799)
+
+[node name="Room2" parent="." unique_id=2049328423 node_paths=PackedStringArray("spots", "neighbors") instance=ExtResource("9_0ld40")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.977679, 1.1583791, -7.1861057)
+spots = [NodePath("MeshInstance3D"), NodePath("Node3D")]
+neighbors = [NodePath("../Room")]
+
+[node name="Distraction" type="Node3D" parent="Room2" unique_id=1484613208 node_paths=PackedStringArray("room")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.057926, 0, -1.4950161)
+script = ExtResource("19_gqmmt")
+room = NodePath("..")
+metadata/_custom_type_script = "uid://cng5rv84le1jw"
+
+[node name="Node3D" type="Node3D" parent="Room2" unique_id=1185466326]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4279175, 0, -5.071122)
 
 [node name="budka" parent="." unique_id=1432285661 instance=ExtResource("20_gqmmt")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -6.582837, -0.27379513, -0.0743351)
@@ -243,5 +292,8 @@ transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -6.582837, -0.27379513,
 [connection signal="clicked_closeup" from="PlayerCam" to="DirectionalLight3D" method="_on_player_cam_clicked_closeup"]
 [connection signal="on_hover_end" from="PlayerCam/Interactor" to="." method="_turn_off"]
 [connection signal="on_hover_start" from="PlayerCam/Interactor" to="." method="_turn_on"]
+[connection signal="on_interact" from="Area3D" to="DirectionalLight3D" method="trigger_cam"]
+[connection signal="on_interact" from="Area3D2" to="DirectionalLight3D" method="trigger_cam"]
+[connection signal="on_interact" from="Area3D3" to="DirectionalLight3D" method="trigger_radio"]
 [connection signal="on_hover_end" from="FreeroamController/FreeroamCam/Interactor" to="." method="_turn_off"]
 [connection signal="on_hover_start" from="FreeroamController/FreeroamCam/Interactor" to="." method="_turn_on"]

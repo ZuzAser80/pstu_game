@@ -2,7 +2,6 @@ class_name Interactor extends Node3D
 
 @export var ray_length := 1000
 @export var collision_mask := 2
-@export var handle_clicks := true;
 
 @onready var camera : Camera3D = get_parent() as Camera3D;
 
@@ -30,10 +29,11 @@ func _handle_hover(_event: InputEvent) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	_handle_hover(event);
-	if handle_clicks:
-		_handle_mouse_button(event);
+	_handle_mouse_button(event);
 
 func _handle_mouse_button(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and can_interact and current_collider.has_method("interact"):
-		print("_handle_mouse_button: ", current_collider.name)
-		current_collider.interact();
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and can_interact and current_collider.has_method("interact"):		
+		var arr : Dictionary[String, Variant]
+		for i in current_collider.get_meta_list():
+			arr[i] = current_collider.get_meta(i)
+		current_collider.interact(arr);

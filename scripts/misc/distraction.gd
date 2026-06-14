@@ -2,23 +2,14 @@ class_name Distraction extends Node3D
 
 @export var room: Room
 @export var radius: float = 5.0
-@export var activation_delay: float = -1.0
 @export var one_shot: bool = true
 
 var _triggered: bool = false
-var _timer: Timer
 
 
 func _ready() -> void:
 	if room == null:
 		room = _find_parent_room()
-	if activation_delay >= 0.0:
-		_timer = Timer.new()
-		add_child(_timer)
-		_timer.one_shot = true
-		_timer.timeout.connect(_on_timer_timeout)
-		_timer.start(activation_delay)
-
 
 func activate() -> void:
 	if _triggered and one_shot:

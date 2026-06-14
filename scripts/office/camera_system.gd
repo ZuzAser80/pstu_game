@@ -1,6 +1,7 @@
 extends Node
 
 @export var cameras : Array[SubViewport];
+@export var radios : Array[Distraction];
 @export var no_visual : Texture2D
 @export var display : Sprite3D
 @export var close_up : Sprite2D
@@ -21,7 +22,14 @@ func _refresh() -> void:
 		display.texture = no_visual;
 	
 
-func _move_to_cam(index: int) -> void:
+func trigger_radio(number: Dictionary[String, Variant]) -> void:
+	if number.has("radio_number"):
+		radios[number["radio_number"]].activate()
+	else:
+		print("haven't found proper meta")
+		
+
+func move_to_cam(index: int) -> void:
 	currentIndex = index;
 	_refresh();
 
@@ -30,6 +38,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		close_up_open =  false;
 		close_up.texture = null;
 
-func _on_player_cam_clicked_closeup(number: Variant) -> void:	
+func trigger_cam(number: Dictionary[String, Variant]) -> void:
 	close_up_open = true;
-	_move_to_cam(number);
+	move_to_cam(number["number"] as int);
