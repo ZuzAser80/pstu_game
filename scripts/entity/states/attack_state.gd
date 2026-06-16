@@ -12,7 +12,9 @@ func enter(_char_reference : AI_Base):
 func _select_attack_target() -> void:
 	print("selecting target...")
 	var target = ai_base.current_room.targets.pick_random()
-	if target == null: return
+	if target == null: 
+		transitioned.emit(IDLE) 
+		return
 	print("selected:", target.name)
 	if target.type == Breakable.BreakableType.Door:
 		print("door hit, should transition into chase but slower idk")
