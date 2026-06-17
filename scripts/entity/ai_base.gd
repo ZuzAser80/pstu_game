@@ -11,6 +11,9 @@ class_name AI_Base
 @export var detection_radius : float;
 @export var detection_timer_wait : int;
 @export var anim : AnimationPlayer;
+@export var anim_idle : String = "idle";
+@export var anim_walk : String = "walking";
+@export var anim_run : String = "run";
 
 @onready var idle_timer : Timer = $IdleTimer;
 @onready var nav_agent : NavigationAgent3D = $NavigationAgent3D;
@@ -41,9 +44,17 @@ func _on_move_completion() -> void:
 	nav_agent.target_reached.disconnect(_on_move_completion)
 	on_reached_target.emit();	
 
+func _face_direction(delta: float) -> void:
+	var next_pos = nav_agent.get_next_path_position()
+	var dir = global_position.direction_to(next_pos)
+	dir.y = 0
+	if dir.length() > 0.01:
+		global_basis = global_basis.slerp(Basis.looking_at(dir, Vector3.UP, true), delta * 8.0)
+
 func _physics_process(delta: float) -> void:
 	if not should_move: return
 	physics_delta = delta
+	_face_direction(delta)
 	var next_path_position: Vector3 = nav_agent.get_next_path_position()
 	var new_velocity: Vector3 = global_position.direction_to(next_path_position) * movement_speed * (0.2 * hostility_level)
 	if nav_agent.avoidance_enabled:

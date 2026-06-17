@@ -8,7 +8,7 @@ func enter(_char_reference : AI_Base):
 	print("idle entered")
 	ai_base.idle_timer.start();
 	ai_base.idle_timer.timeout.connect(try_move);
-	#ai_base.anim.play();
+	ai_base.anim.play(ai_base.anim_idle);
 
 func try_move() -> void:
 	if randi_range(0, 5) == 1:

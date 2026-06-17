@@ -13,6 +13,7 @@ func enter(_char_reference : AI_Base):
 	timer.wait_time = ai_base.detection_timer_wait;
 	timer.start()
 	timer.timeout.connect(activate)
+	ai_base.anim.play(ai_base.anim_run);
 
 func activate() -> void:	
 

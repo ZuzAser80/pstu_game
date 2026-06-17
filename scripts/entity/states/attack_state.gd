@@ -6,7 +6,7 @@ func _ready() -> void:
 func enter(_char_reference : AI_Base):
 	super.enter(_char_reference)
 	_select_attack_target()
-	#start playing anim or sum
+	ai_base.anim.play(ai_base.anim_idle);
 
 
 func _select_attack_target() -> void:

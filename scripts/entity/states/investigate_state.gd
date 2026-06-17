@@ -12,6 +12,7 @@ func enter(_char_reference : AI_Base):
 	ai_base.should_move = true
 	ai_base._move_to_target_room()
 	ai_base.on_reached_target.connect(_stop)
+	ai_base.anim.play(ai_base.anim_walk);
 
 func _stop() -> void:
 	transitioned.emit(IDLE)
