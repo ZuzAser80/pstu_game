@@ -6,10 +6,13 @@ class_name FreeroamCam extends Camera3D
 @export var collision_mask := 2
 
 @onready var body := get_parent();
+@onready var canvas_layer := $CanvasLayer
 
 func _ready() -> void:
-	pass
-	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	process_mode = PROCESS_MODE_ALWAYS
+
+func _process(delta: float) -> void:
+	canvas_layer.visible = current
 
 func _unhandled_input(event: InputEvent) -> void:
 	_handle_mouse_motion(event);

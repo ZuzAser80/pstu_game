@@ -28,5 +28,5 @@ func swap() -> void:
 		enable_freeroam()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and event.keycode == KEY_E:
+	if event is InputEventKey and event.pressed and event.keycode == KEY_F:
 		swap()

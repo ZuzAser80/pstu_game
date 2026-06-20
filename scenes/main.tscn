@@ -7,12 +7,12 @@
 [ext_resource type="Script" uid="uid://bh7q6bb12tdsl" path="res://scripts/misc/breakable.gd" id="3_a8y0u"]
 [ext_resource type="Script" uid="uid://deiw3155qusc4" path="res://scripts/office/camera_system.gd" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bwbli04okelba" path="res://models/environment/first_floor.glb" id="4_gqmmt"]
+[ext_resource type="Texture2D" uid="uid://bd1h1jgdfo860" path="res://materials/budka.png" id="4_og1vs"]
 [ext_resource type="Script" uid="uid://0f752tg6ys4m" path="res://scripts/entity/ai_state_machine.gd" id="5_tefeu"]
 [ext_resource type="Script" uid="uid://cq8lujpb4pnwc" path="res://scripts/entity/states/idle_state.gd" id="6_tefeu"]
 [ext_resource type="Script" uid="uid://c58oxvpe0vxcf" path="res://scripts/entity/states/advance_state.gd" id="7_o6xl0"]
 [ext_resource type="Shader" uid="uid://cdg8p6x7brude" path="res://shaders/vhs_shader.gdshader" id="7_yc10j"]
 [ext_resource type="Script" uid="uid://cgit0e4f72ekj" path="res://scripts/misc/interactable.gd" id="8_0ld40"]
-[ext_resource type="PackedScene" uid="uid://canim6cp3iolt" path="res://scenes/camera.tscn" id="8_og1vs"]
 [ext_resource type="Script" uid="uid://c5fektthy474" path="res://scripts/entity/ai_base.gd" id="8_tipki"]
 [ext_resource type="PackedScene" uid="uid://bi32okftrh2ht" path="res://scenes/base_room.tscn" id="9_0ld40"]
 [ext_resource type="Material" uid="uid://dct1v2aiicele" path="res://materials/new_standard_material_3d.tres" id="12_eb6dy"]
@@ -55,19 +55,6 @@ func _process(delta: float) -> void:
 [sub_resource type="ViewportTexture" id="ViewportTexture_0wfyh"]
 viewport_path = NodePath("Camera")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yc10j"]
-shader = ExtResource("7_yc10j")
-shader_parameter/smearing = 0.5
-shader_parameter/color_offset = 0.005
-shader_parameter/sharpening = 0.4
-shader_parameter/static_noise = 0.08
-shader_parameter/crack_center = Vector2(0.15, 0.85)
-shader_parameter/crack_intensity = 0.4
-shader_parameter/crack_size = 0.0
-shader_parameter/vertical_jitter = 0.002
-shader_parameter/scanline_opacity = 0.1
-shader_parameter/vignette_intensity = 0.3
-
 [sub_resource type="ViewportTexture" id="ViewportTexture_sugp2"]
 viewport_path = NodePath("Camera")
 
@@ -91,11 +78,25 @@ _data = {
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_dp3eg"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2wyq8"]
+shader = ExtResource("7_yc10j")
+shader_parameter/smearing = 0.5
+shader_parameter/color_offset = 0.005
+shader_parameter/sharpening = 0.4
+shader_parameter/static_noise = 0.08
+shader_parameter/crack_center = Vector2(0.15, 0.85)
+shader_parameter/crack_intensity = 0.4
+shader_parameter/crack_size = 0.0
+shader_parameter/vertical_jitter = 0.002
+shader_parameter/scanline_opacity = 0.1
+shader_parameter/vignette_intensity = 0.3
+
 [node name="Node3D" type="Node3D" unique_id=553121940]
 script = ExtResource("1_tefeu")
 highlightables = Dictionary[NodePath, NodePath]({
 NodePath("Area3D"): NodePath("Area3D/CSGMesh3D2"),
-NodePath("Area3D3"): NodePath("Area3D3/MeshInstance3D2")
+NodePath("Area3D3"): NodePath("Area3D3/MeshInstance3D2"),
+NodePath("Camera/CameraViewport/Camera3D/Area3D3"): NodePath("Camera/CameraViewport/Camera3D/Area3D3/MeshInstance3D2")
 })
 
 [node name="GameModeManager" type="Node" parent="." unique_id=1711575424 node_paths=PackedStringArray("freeroam_controller", "office_controller")]
@@ -107,8 +108,9 @@ metadata/_custom_type_script = "uid://7fnki0j8tex6"
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2140260495 node_paths=PackedStringArray("cameras", "radios", "display", "close_up")]
 transform = Transform3D(1, 0, 0, 0, 0.6789161, 0.73421586, 0, -0.73421586, 0.6789161, 0, 1.3558397, 0)
 script = ExtResource("3_sugp2")
-cameras = [NodePath("../Camera"), NodePath("../SubViewport2")]
+cameras = [NodePath("../Camera/CameraViewport")]
 radios = [NodePath("../Room/Distraction")]
+no_visual = ExtResource("4_og1vs")
 display = NodePath("../Sprite3D")
 close_up = NodePath("../Sprite2D")
 
@@ -137,29 +139,6 @@ metadata/number = 1
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=135481674]
 position = Vector2(569, -483)
 texture = SubResource("ViewportTexture_0wfyh")
-
-[node name="SubViewport2" type="SubViewport" parent="." unique_id=522621952]
-size = Vector2i(640, 480)
-script = ExtResource("3_a8y0u")
-metadata/visual = true
-metadata/audio = false
-
-[node name="Camera3D" type="Camera3D" parent="SubViewport2" unique_id=805793273]
-transform = Transform3D(0.6531035, -0.5663806, 0.50266176, 0, 0.6637826, 0.7479256, -0.75726867, -0.4884728, 0.4335187, 27.355692, 5.2590313, 8.429757)
-current = true
-fov = 108.7
-
-[node name="CanvasLayer" type="CanvasLayer" parent="SubViewport2" unique_id=1065578024]
-
-[node name="ColorRect" type="ColorRect" parent="SubViewport2/CanvasLayer" unique_id=743299533]
-material = SubResource("ShaderMaterial_yc10j")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Camera" parent="." unique_id=628920844 instance=ExtResource("8_og1vs")]
 
 [node name="PlayerCam" type="Camera3D" parent="." unique_id=1499502354]
 transform = Transform3D(0.9977573, 0, 0.06693565, 0, 1, 0, -0.06693565, 0, 0.9977573, 0, 1.3246332, 1.2483203)
@@ -290,6 +269,14 @@ metadata/_custom_type_script = "uid://dog8q1b40mg6l"
 script = ExtResource("17_muem4")
 metadata/_custom_type_script = "uid://cj6t3i7baijdq"
 
+[node name="CanvasLayer" type="CanvasLayer" parent="FreeroamController/FreeroamCam" unique_id=1985661648]
+
+[node name="Label" type="Label" parent="FreeroamController/FreeroamCam/CanvasLayer" unique_id=263564093]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "porno
+"
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FreeroamController" unique_id=89012932]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_muem4")
@@ -330,8 +317,48 @@ metadata/_custom_type_script = "uid://cng5rv84le1jw"
 [node name="Node3D" type="Node3D" parent="Room2" unique_id=1185466326]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8265944, 0, -3.4435697)
 
-[connection signal="on_broken" from="SubViewport2" to="DirectionalLight3D" method="_refresh"]
-[connection signal="on_broken" from="Camera" to="DirectionalLight3D" method="_refresh"]
+[node name="Camera" type="Node3D" parent="." unique_id=123909701]
+
+[node name="CameraViewport" type="SubViewport" parent="Camera" unique_id=1833218258]
+size = Vector2i(640, 480)
+script = ExtResource("3_a8y0u")
+metadata/visual = false
+metadata/audio = false
+
+[node name="Camera3D" type="Camera3D" parent="Camera/CameraViewport" unique_id=948733155]
+transform = Transform3D(0.76421267, 0.31517273, -0.5627123, 0, 0.87247044, 0.48866692, 0.64496434, -0.37344545, 0.66675293, 10.303893, 3.5861125, -2.898655)
+current = true
+fov = 108.7
+
+[node name="Area3D3" type="Area3D" parent="Camera/CameraViewport/Camera3D" unique_id=1083477195]
+transform = Transform3D(0.7642126, 1.4901161e-08, 0.64496434, 0.31517273, 0.8724704, -0.37344545, -0.5627123, 0.48866692, 0.66675293, 0, 0, 0)
+collision_layer = 3
+collision_mask = 524291
+script = ExtResource("8_0ld40")
+metadata/number = 0
+metadata/radio_number = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera/CameraViewport/Camera3D/Area3D3" unique_id=1186309499]
+shape = SubResource("BoxShape3D_sugp2")
+debug_color = Color(0.9529412, 0.21960784, 0, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera/CameraViewport/Camera3D/Area3D3" unique_id=1674658952]
+mesh = SubResource("TubeTrailMesh_0ld40")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Camera/CameraViewport/Camera3D/Area3D3" unique_id=219111130]
+mesh = SubResource("TubeTrailMesh_0ld40")
+surface_material_override/0 = ExtResource("1_jyhfs")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera/CameraViewport" unique_id=1108386381]
+
+[node name="ColorRect" type="ColorRect" parent="Camera/CameraViewport/CanvasLayer" unique_id=765645340]
+material = SubResource("ShaderMaterial_2wyq8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [connection signal="clicked_closeup" from="PlayerCam" to="DirectionalLight3D" method="_on_player_cam_clicked_closeup"]
 [connection signal="on_hover_end" from="PlayerCam/Interactor" to="." method="_turn_off"]
 [connection signal="on_hover_start" from="PlayerCam/Interactor" to="." method="_turn_on"]
@@ -340,3 +367,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8265944, 0, -3.4435697)
 [connection signal="on_interact" from="Area3D3" to="DirectionalLight3D" method="trigger_radio"]
 [connection signal="on_hover_end" from="FreeroamController/FreeroamCam/Interactor" to="." method="_turn_off"]
 [connection signal="on_hover_start" from="FreeroamController/FreeroamCam/Interactor" to="." method="_turn_on"]
+[connection signal="on_interact" from="Camera/CameraViewport/Camera3D/Area3D3" to="DirectionalLight3D" method="repair_cam"]

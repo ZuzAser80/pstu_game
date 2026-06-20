@@ -7,6 +7,10 @@ var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var camera : Camera3D = $FreeroamCam;
 
+static var shotgun_sheels : int = 0
+static var cam_repair_kit : int = 1
+static var radio : int = 0
+
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity * delta

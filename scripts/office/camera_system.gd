@@ -41,3 +41,11 @@ func _unhandled_input(event: InputEvent) -> void:
 func trigger_cam(number: Dictionary[String, Variant]) -> void:
 	close_up_open = true;
 	move_to_cam(number["number"] as int);
+
+func repair_cam(args: Dictionary[String, Variant]) -> void:
+	print("nigga")
+	if args.has("number") and FreeroamController.cam_repair_kit > 0:
+		print("nigga22")
+		FreeroamController.cam_repair_kit -= 1
+		cameras[args["number"]].set_meta("visual", true)
+		_refresh()

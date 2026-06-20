@@ -36,4 +36,5 @@ func _handle_mouse_button(event: InputEvent) -> void:
 		var arr : Dictionary[String, Variant]
 		for i in current_collider.get_meta_list():
 			arr[i] = current_collider.get_meta(i)
+		print("aaa::", len(arr))
 		current_collider.interact(arr);
