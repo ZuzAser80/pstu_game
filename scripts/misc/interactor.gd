@@ -2,11 +2,13 @@ class_name Interactor extends Node3D
 
 @export var ray_length := 1000
 @export var collision_mask := 2
+@export var shotgun : Node3D;
 
 @onready var camera : Camera3D = get_parent() as Camera3D;
 
 var can_interact : bool = true;
 var current_collider : CollisionObject3D;
+var shogun_out : bool = false;
 
 signal on_hover_start(collider);
 signal on_hover_end(collider);
@@ -31,10 +33,24 @@ func _unhandled_input(event: InputEvent) -> void:
 	_handle_hover(event);
 	_handle_mouse_button(event);
 
+func _handle_shotgun(event : InputEvent) -> void:
+	if event is InputEventKey and event.pressed and event.keycode == KEY_Q:
+		shogun_out = !shogun_out
+		shotgun.process_mode =  Node.PROCESS_MODE_ALWAYS if shotgun.process_mode == Node.PROCESS_MODE_DISABLED else Node.PROCESS_MODE_DISABLED;		
+		pass
+
 func _handle_mouse_button(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and can_interact and current_collider.has_method("interact"):		
-		var arr : Dictionary[String, Variant]
-		for i in current_collider.get_meta_list():
-			arr[i] = current_collider.get_meta(i)
-		print("aaa::", len(arr))
-		current_collider.interact(arr);
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if shogun_out and GameModeManager.shotgun_sheels > 1:
+			print("kaboom kablow")
+			GameModeManager.shotgun_sheels -= 1
+			shogun_out = false
+			shotgun.process_mode = Node.PROCESS_MODE_DISABLED
+			#todo: raycast, if we hit an enemy we force him to retreat
+			pass
+		elif can_interact and current_collider.has_method("interact"):
+			var arr : Dictionary[String, Variant]
+			for i in current_collider.get_meta_list():
+				arr[i] = current_collider.get_meta(i)
+			current_collider.interact(arr);
+			

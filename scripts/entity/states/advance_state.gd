@@ -6,6 +6,9 @@ func _ready() -> void:
 func enter(_char_reference : AI_Base):
 	super.enter(_char_reference)
 	print("advance entered")
+	if ai_base.current_room.distance_to_office == 1:
+		transitioned.emit(CHASE)
+		return
 	_select_room();
 	ai_base.should_move = true;
 	ai_base._move_to_target_room()

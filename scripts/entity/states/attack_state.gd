@@ -5,9 +5,16 @@ func _ready() -> void:
 
 func enter(_char_reference : AI_Base):
 	super.enter(_char_reference)
-	_select_attack_target()
 	ai_base.anim.play(ai_base.anim_idle);
+	if ai_base.target_player != null:
+		_attack_player()
+	else:
+		_select_attack_target()
 
+func _attack_player() -> void:
+	print("attacking player")
+	ai_base.target_player = null
+	transitioned.emit(CHASE)
 
 func _select_attack_target() -> void:
 	print("selecting target...")

@@ -18,8 +18,10 @@ class_name AI_Base
 @onready var idle_timer : Timer = $IdleTimer;
 @onready var nav_agent : NavigationAgent3D = $NavigationAgent3D;
 @onready var state_machine : StateMachine = $NavigationAgent3D/StateMachine;
+@onready var detection_area : Area3D = $DetectionArea;
 
 var target_room : Room;
+var target_player : FreeroamController;
 var physics_delta : float;
 var should_move : bool = false;
 var retreating : bool = false;

@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://db82qfoqrxidm" path="res://scripts/misc/highlight_manager.gd" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://b2kfpk05e4ucs" path="res://scripts/office/office_cam.gd" id="2_0wfyh"]
 [ext_resource type="Script" uid="uid://7fnki0j8tex6" path="res://scripts/misc/game_mode.gd" id="2_dp3eg"]
+[ext_resource type="Script" uid="uid://xugqeqysykh5" path="res://scripts/office/office_ui_controller.gd" id="3_2wyq8"]
 [ext_resource type="Script" uid="uid://bh7q6bb12tdsl" path="res://scripts/misc/breakable.gd" id="3_a8y0u"]
 [ext_resource type="Script" uid="uid://deiw3155qusc4" path="res://scripts/office/camera_system.gd" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bwbli04okelba" path="res://models/environment/first_floor.glb" id="4_gqmmt"]
@@ -32,25 +33,6 @@ polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Arr
 agent_radius = 0.2
 
 [sub_resource type="BoxMesh" id="BoxMesh_7dm0k"]
-
-[sub_resource type="PrismMesh" id="PrismMesh_0wfyh"]
-
-[sub_resource type="GDScript" id="GDScript_jyhfs"]
-script/source = "extends CSGMesh3D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if Input.is_action_pressed(\"move_forward\"):
-		#print(\"NIGGER\");
-		pass
-	pass
-"
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_0wfyh"]
 viewport_path = NodePath("Camera")
@@ -105,11 +87,22 @@ freeroam_controller = NodePath("../FreeroamController")
 office_controller = NodePath("../PlayerCam")
 metadata/_custom_type_script = "uid://7fnki0j8tex6"
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2140260495 node_paths=PackedStringArray("cameras", "radios", "display", "close_up")]
+[node name="Timer" type="Timer" parent="GameModeManager" unique_id=1477087839]
+wait_time = 2.0
+autostart = true
+
+[node name="OfficeUIController" type="Node" parent="GameModeManager" unique_id=891198768 node_paths=PackedStringArray("radio_button")]
+script = ExtResource("3_2wyq8")
+radio_button = NodePath("../../Area3D3")
+metadata/_custom_type_script = "uid://xugqeqysykh5"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2140260495 node_paths=PackedStringArray("cameras", "cam_to_room", "display", "close_up")]
 transform = Transform3D(1, 0, 0, 0, 0.6789161, 0.73421586, 0, -0.73421586, 0.6789161, 0, 1.3558397, 0)
 script = ExtResource("3_sugp2")
-cameras = [NodePath("../Camera/CameraViewport")]
-radios = [NodePath("../Room/Distraction")]
+cameras = [NodePath("../Camera/CameraViewport"), NodePath("../Camera2/CameraViewport")]
+cam_to_room = {
+NodePath("../Camera2/CameraViewport"): NodePath("../Room2")
+}
 no_visual = ExtResource("4_og1vs")
 display = NodePath("../Sprite3D")
 close_up = NodePath("../Sprite2D")
@@ -125,16 +118,6 @@ mesh = SubResource("BoxMesh_7dm0k")
 
 [node name="first_floor" parent="NavigationRegion3D" unique_id=2043675402 instance=ExtResource("4_gqmmt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.82514, 0, 0)
-
-[node name="CSGMesh3D2" type="CSGMesh3D" parent="." unique_id=922226031]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1381235, 1.2412261, 0)
-material_overlay = ExtResource("1_jyhfs")
-use_collision = true
-collision_layer = 3
-collision_mask = 524291
-mesh = SubResource("PrismMesh_0wfyh")
-script = SubResource("GDScript_jyhfs")
-metadata/number = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=135481674]
 position = Vector2(569, -483)
@@ -177,6 +160,7 @@ collision_layer = 3
 collision_mask = 524291
 script = ExtResource("8_0ld40")
 metadata/number = 1
+metadata/visual = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2" unique_id=1779286778]
 shape = SubResource("BoxShape3D_sugp2")
@@ -290,22 +274,17 @@ spots = [NodePath("Node3D"), NodePath("Node3D2")]
 neighbors = [NodePath("../Room2")]
 distance_to_office = 1
 
-[node name="Distraction" type="Node3D" parent="Room" unique_id=1670932013 node_paths=PackedStringArray("room")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3135357, 0, -8.091214)
-script = ExtResource("19_gqmmt")
-room = NodePath("..")
-metadata/_custom_type_script = "uid://cng5rv84le1jw"
-
 [node name="Node3D" type="Node3D" parent="Room" unique_id=1713919026]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5166225, 0, -4.2467446)
 
 [node name="Node3D2" type="Node3D" parent="Room" unique_id=1858422114]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.932632, 2.385398, 0.75668526)
 
-[node name="Room2" parent="." unique_id=2049328423 node_paths=PackedStringArray("spots", "neighbors") instance=ExtResource("9_0ld40")]
+[node name="Room2" parent="." unique_id=2049328423 node_paths=PackedStringArray("spots", "neighbors", "targets") instance=ExtResource("9_0ld40")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.968215, 1.1583791, -3.9417958)
 spots = [NodePath("Node3D")]
 neighbors = [NodePath("../Room")]
+targets = [NodePath("../Camera2/CameraViewport")]
 distance_to_office = 2
 
 [node name="Distraction" type="Node3D" parent="Room2" unique_id=1484613208 node_paths=PackedStringArray("room")]
@@ -359,6 +338,49 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Camera2" type="Node3D" parent="." unique_id=1427304244]
+
+[node name="CameraViewport" type="SubViewport" parent="Camera2" unique_id=590288515]
+size = Vector2i(640, 480)
+script = ExtResource("3_a8y0u")
+metadata/visual = true
+metadata/audio = false
+
+[node name="Camera3D" type="Camera3D" parent="Camera2/CameraViewport" unique_id=754528296]
+transform = Transform3D(-0.562496, -0.6084553, 0.55980396, -0.026917659, 0.69019085, 0.72312653, -0.82636184, 0.3916872, -0.4046078, 25.200905, 7.296945, -2.898655)
+current = true
+fov = 108.7
+
+[node name="Area3D3" type="Area3D" parent="Camera2/CameraViewport/Camera3D" unique_id=1547906788]
+transform = Transform3D(0.7642126, 1.4901161e-08, 0.64496434, 0.31517273, 0.8724704, -0.37344545, -0.5627123, 0.48866692, 0.66675293, 0, 0, 0)
+collision_layer = 3
+collision_mask = 524291
+script = ExtResource("8_0ld40")
+metadata/number = 0
+metadata/radio_number = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera2/CameraViewport/Camera3D/Area3D3" unique_id=268115410]
+shape = SubResource("BoxShape3D_sugp2")
+debug_color = Color(0.9529412, 0.21960784, 0, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera2/CameraViewport/Camera3D/Area3D3" unique_id=948277079]
+mesh = SubResource("TubeTrailMesh_0ld40")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Camera2/CameraViewport/Camera3D/Area3D3" unique_id=1054426428]
+visible = false
+mesh = SubResource("TubeTrailMesh_0ld40")
+surface_material_override/0 = ExtResource("1_jyhfs")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2/CameraViewport" unique_id=273323045]
+
+[node name="ColorRect" type="ColorRect" parent="Camera2/CameraViewport/CanvasLayer" unique_id=1307145678]
+material = SubResource("ShaderMaterial_2wyq8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [connection signal="clicked_closeup" from="PlayerCam" to="DirectionalLight3D" method="_on_player_cam_clicked_closeup"]
 [connection signal="on_hover_end" from="PlayerCam/Interactor" to="." method="_turn_off"]
 [connection signal="on_hover_start" from="PlayerCam/Interactor" to="." method="_turn_on"]
@@ -368,3 +390,4 @@ grow_vertical = 2
 [connection signal="on_hover_end" from="FreeroamController/FreeroamCam/Interactor" to="." method="_turn_off"]
 [connection signal="on_hover_start" from="FreeroamController/FreeroamCam/Interactor" to="." method="_turn_on"]
 [connection signal="on_interact" from="Camera/CameraViewport/Camera3D/Area3D3" to="DirectionalLight3D" method="repair_cam"]
+[connection signal="on_interact" from="Camera2/CameraViewport/Camera3D/Area3D3" to="DirectionalLight3D" method="repair_cam"]
