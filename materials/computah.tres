@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cnjevuhxl5a60"]
+
+[ext_resource type="Texture2D" uid="uid://qbctcgxfewmb" path="res://materials/computah.png" id="1_51o8q"]
+
+[resource]
+albedo_texture = ExtResource("1_51o8q")
+emission = Color(0.08742689, 0.021409266, 0.036025602, 1)
+texture_filter = 0

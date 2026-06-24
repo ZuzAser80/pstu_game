@@ -13,8 +13,7 @@ func enter(_char_reference : AI_Base):
 
 func _attack_player() -> void:
 	print("attacking player")
-	ai_base.target_player = null
-	transitioned.emit(CHASE)
+	GameModeManager.trigger_game_over()
 
 func _select_attack_target() -> void:
 	print("selecting target...")

@@ -26,6 +26,7 @@ func radio_active() -> bool:
 	return cam_to_room.has(cameras[currentIndex])
 
 func trigger_radio(number: Dictionary[String, Variant]) -> void:	
+	GameModeManager.drain_power(GameModeManager.instance.power_drain_radio)
 	print("triggering radio")
 	if radio_active():
 		cam_to_room[cameras[currentIndex]].distraction.activate()
@@ -44,6 +45,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		close_up.texture = null;
 
 func trigger_cam(number: Dictionary[String, Variant]) -> void:
+	GameModeManager.drain_power(GameModeManager.instance.power_drain_cam)
 	close_up_open = true;
 	move_to_cam(number["number"] as int);
 

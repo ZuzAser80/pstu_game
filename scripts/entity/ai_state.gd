@@ -7,6 +7,7 @@ static var ATTACK = "AttackState"
 static var ADVANCE = "AdvanceState"
 static var CHASE = "ChaseState"
 static var INVESTIGATE = "InvestigateState"
+static var FLEE = "FleeState"
 
 var state_name := "";
 

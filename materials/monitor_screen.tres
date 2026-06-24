@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bqcof7c2g5fnp"]
+
+[ext_resource type="Shader" uid="uid://desg41k8fa6ya" path="res://shaders/monitor_screen.gdshader" id="1_vyl3h"]
+[ext_resource type="Texture2D" uid="uid://qbctcgxfewmb" path="res://materials/computah.png" id="2_7me7n"]
+[ext_resource type="Texture2D" uid="uid://bd1h1jgdfo860" path="res://materials/budka.png" id="3_5ctgs"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_vyl3h")
+shader_parameter/camera_feed = ExtResource("3_5ctgs")
+shader_parameter/original_texture = ExtResource("2_7me7n")
+shader_parameter/screen_uv_min = Vector2(0.2656, 0.2812)
+shader_parameter/screen_uv_max = Vector2(0.5156, 0.4844)

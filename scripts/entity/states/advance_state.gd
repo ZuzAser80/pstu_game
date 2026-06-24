@@ -10,17 +10,23 @@ func enter(_char_reference : AI_Base):
 		transitioned.emit(CHASE)
 		return
 	_select_room();
-	ai_base.should_move = true;
-	ai_base._move_to_target_room()
-	ai_base.on_reached_target.connect(_stop)
-	ai_base.anim.play(ai_base.anim_walk);
+	if ai_base._move_to_target_room():
+		ai_base.should_move = true;
+		ai_base.on_reached_target.connect(_stop)
+		ai_base.anim.play(ai_base.anim_walk);
+	else:
+		transitioned.emit(IDLE)
 
 func _select_room() -> void:
-	# TODO: make a check if it is near office, then should aggravate instead of moving.
 	var neighbors = ai_base.current_room.get_neighbors(!ai_base.retreating)
+	neighbors = neighbors.filter(func(r: Room): return r.get_available_spot_count() > 0)
 	if neighbors.is_empty():
 		neighbors = ai_base.current_room.get_all_neighbors()
+		neighbors = neighbors.filter(func(r: Room): return r.get_available_spot_count() > 0)
 		ai_base.aggravation += 1
+	if neighbors.is_empty():
+		ai_base.target_room = null
+		return
 	ai_base.target_room = neighbors.pick_random();
 
 func _stop() -> void:
@@ -31,5 +37,6 @@ func _stop() -> void:
 
 func exit():
 	print("advance exited")
-	ai_base.on_reached_target.disconnect(_stop)
+	if ai_base.on_reached_target.is_connected(_stop):
+		ai_base.on_reached_target.disconnect(_stop)
 	

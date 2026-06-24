@@ -5,7 +5,8 @@ class_name FreeroamController extends CharacterBody3D
 
 var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-@onready var camera : Camera3D = $FreeroamCam;
+var camera : Camera3D:
+	get: return $FreeroamCam
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():

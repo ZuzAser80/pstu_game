@@ -9,10 +9,12 @@ func enter(_char_reference : AI_Base):
 	if ai_base.target_room == null:
 		transitioned.emit(IDLE)
 		return
-	ai_base.should_move = true
-	ai_base._move_to_target_room()
-	ai_base.on_reached_target.connect(_stop)
-	ai_base.anim.play(ai_base.anim_walk);
+	if ai_base._move_to_target_room():
+		ai_base.should_move = true
+		ai_base.on_reached_target.connect(_stop)
+		ai_base.anim.play(ai_base.anim_walk);
+	else:
+		transitioned.emit(IDLE)
 
 func _stop() -> void:
 	transitioned.emit(IDLE)

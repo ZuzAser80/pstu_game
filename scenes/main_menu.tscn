@@ -1,0 +1,61 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://bwbli04okelba" path="res://models/environment/first_floor.glb" id="1"]
+[ext_resource type="Script" path="res://scripts/misc/main_menu.gd" id="2"]
+
+[node name="MainMenu" type="Node3D"]
+script = ExtResource("2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.5, -0.5, 0, 0.5, 0.5, 0, 0, 0, 1, 0, 10, 0)
+
+[node name="CameraPivot" type="Node3D" parent="."]
+
+[node name="MenuCamera" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -12)
+current = true
+
+[node name="first_floor" parent="." instance=ExtResource("1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.82514, 0, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.4)
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer"]
+
+[node name="Title" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+text = "PSTU GAME"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 64
+
+[node name="Spacer" type="Control" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+
+[node name="PressAnyKey" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+text = "Press any key to start..."
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1.0)
+
+[node name="Spacer2" type="Control" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+
+[node name="PlayButton" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+text = "Play"
+horizontal_alignment = 1
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+text = "Quit"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/PlayButton" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_pressed"]

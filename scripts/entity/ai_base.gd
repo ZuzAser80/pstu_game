@@ -27,18 +27,50 @@ var should_move : bool = false;
 var retreating : bool = false;
 var target_breakable : Breakable;
 
+var reserved_spot : Node3D;
+var reserved_room : Room;
+
 signal on_reached_target;
 
 func _ready() -> void:
 	nav_agent.velocity_computed.connect(_on_velocity_computed)
+	_reserve_initial_spot()
 
-func _move_to_target_room() -> void:
-	if target_room == null: return
+func _reserve_initial_spot() -> void:
+	if current_room == null: return
+	var spot = current_room.get_available_spot()
+	if spot != null:
+		current_room.reserve_spot(spot)
+		reserved_spot = spot
+		reserved_room = current_room
+
+func _release_current_spot() -> void:
+	if reserved_spot != null and reserved_room != null:
+		reserved_room.release_spot(reserved_spot)
+	reserved_spot = null
+	reserved_room = null
+
+func _reserve_spot_in(target: Room) -> Node3D:
+	var spot = target.get_available_spot()
+	if spot != null:
+		target.reserve_spot(spot)
+		reserved_spot = spot
+		reserved_room = target
+	return spot
+
+func _move_to_target_room() -> bool:
+	if target_room == null: return false
+	_release_current_spot()
+	var spot = _reserve_spot_in(target_room)
+	if spot == null:
+		print("No available spots in:", target_room.name)
+		return false
 	print("Moving from:", current_room.name, "to:", target_room.name)
-	nav_agent.target_position = target_room.spots.pick_random().global_position;
+	nav_agent.target_position = spot.global_position;
 	print(nav_agent.target_position)
 	if not nav_agent.target_reached.is_connected(_on_move_completion):
 		nav_agent.target_reached.connect(_on_move_completion);
+	return true
 
 func _on_move_completion() -> void:
 	should_move = false;
@@ -67,3 +99,31 @@ func _physics_process(delta: float) -> void:
 
 func _on_velocity_computed(safe_velocity: Vector3) -> void:
 	velocity = safe_velocity
+
+func trigger_flee() -> void:
+	state_machine._transition_to_state(State.FLEE)
+
+func respawn_at_farthest_room() -> void:
+	var rooms = GameModeManager.instance.all_rooms
+	if rooms.is_empty():
+		return
+	var max_dist = 0
+	for r in rooms:
+		if r.distance_to_office > max_dist:
+			max_dist = r.distance_to_office
+	var candidates = rooms.filter(func(r: Room): return r.distance_to_office == max_dist)
+	candidates.shuffle()
+	for target in candidates:
+		var spot = target.get_available_spot()
+		if spot != null:
+			_release_current_spot()
+			global_position = spot.global_position
+			target.reserve_spot(spot)
+			reserved_spot = spot
+			reserved_room = target
+			current_room = target
+			should_move = false
+			if nav_agent.target_reached.is_connected(_on_move_completion):
+				nav_agent.target_reached.disconnect(_on_move_completion)
+			nav_agent.target_position = spot.global_position
+			return
