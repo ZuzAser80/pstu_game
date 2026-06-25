@@ -101,6 +101,8 @@ func _on_velocity_computed(safe_velocity: Vector3) -> void:
 	velocity = safe_velocity
 
 func trigger_flee() -> void:
+	if state_machine.current_state.state_name == State.FLEE:
+		return
 	state_machine._transition_to_state(State.FLEE)
 
 func respawn_at_farthest_room() -> void:

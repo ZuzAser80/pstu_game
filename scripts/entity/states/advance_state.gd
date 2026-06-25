@@ -15,7 +15,10 @@ func enter(_char_reference : AI_Base):
 		ai_base.on_reached_target.connect(_stop)
 		ai_base.anim.play(ai_base.anim_walk);
 	else:
-		transitioned.emit(IDLE)
+		if not ai_base.current_room.targets.is_empty():
+			transitioned.emit(ATTACK)
+		else:
+			transitioned.emit(IDLE)
 
 func _select_room() -> void:
 	var neighbors = ai_base.current_room.get_neighbors(!ai_base.retreating)

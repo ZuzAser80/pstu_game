@@ -1,0 +1,143 @@
+[gd_scene format=3 uid="uid://dh7t7vaxvhh6k"]
+
+[ext_resource type="Script" path="res://scripts/misc/shop.gd" id="1"]
+
+[node name="Shop" type="CanvasLayer"]
+script = ExtResource("1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7)
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CenterContainer"]
+custom_minimum_size = Vector2(400, 420)
+size = Vector2(400, 420)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="CenterContainer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+text = "МАГАЗИН"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 36
+
+[node name="MoneyLabel" type="Label" parent="CenterContainer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+text = "Деньги: $0"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 24
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/Panel/VBoxContainer"]
+
+[node name="ShellRow" type="HBoxContainer" parent="CenterContainer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+
+[node name="ShellIcon" type="Label" parent="CenterContainer/Panel/VBoxContainer/ShellRow"]
+custom_minimum_size = Vector2(30, 0)
+text = "🔫"
+vertical_alignment = 1
+
+[node name="ShellName" type="Label" parent="CenterContainer/Panel/VBoxContainer/ShellRow"]
+size_flags_horizontal = 3
+text = "Патроны для дробовика"
+vertical_alignment = 1
+
+[node name="ShellPrice" type="Label" parent="CenterContainer/Panel/VBoxContainer/ShellRow"]
+custom_minimum_size = Vector2(50, 0)
+text = "$3"
+vertical_alignment = 1
+horizontal_alignment = 2
+
+[node name="ShellCount" type="Label" parent="CenterContainer/Panel/VBoxContainer/ShellRow"]
+custom_minimum_size = Vector2(40, 0)
+text = "x0"
+vertical_alignment = 1
+horizontal_alignment = 2
+
+[node name="ShellBuyButton" type="Button" parent="CenterContainer/Panel/VBoxContainer/ShellRow"]
+custom_minimum_size = Vector2(80, 0)
+text = "Купить"
+
+[node name="RepairRow" type="HBoxContainer" parent="CenterContainer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+
+[node name="RepairIcon" type="Label" parent="CenterContainer/Panel/VBoxContainer/RepairRow"]
+custom_minimum_size = Vector2(30, 0)
+text = "🔧"
+vertical_alignment = 1
+
+[node name="RepairName" type="Label" parent="CenterContainer/Panel/VBoxContainer/RepairRow"]
+size_flags_horizontal = 3
+text = "Ремкомплект для камер"
+vertical_alignment = 1
+
+[node name="RepairPrice" type="Label" parent="CenterContainer/Panel/VBoxContainer/RepairRow"]
+custom_minimum_size = Vector2(50, 0)
+text = "$5"
+vertical_alignment = 1
+horizontal_alignment = 2
+
+[node name="RepairCount" type="Label" parent="CenterContainer/Panel/VBoxContainer/RepairRow"]
+custom_minimum_size = Vector2(40, 0)
+text = "x0"
+vertical_alignment = 1
+horizontal_alignment = 2
+
+[node name="RepairBuyButton" type="Button" parent="CenterContainer/Panel/VBoxContainer/RepairRow"]
+custom_minimum_size = Vector2(80, 0)
+text = "Купить"
+
+[node name="RadioRow" type="HBoxContainer" parent="CenterContainer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+
+[node name="RadioIcon" type="Label" parent="CenterContainer/Panel/VBoxContainer/RadioRow"]
+custom_minimum_size = Vector2(30, 0)
+text = "📻"
+vertical_alignment = 1
+
+[node name="RadioName" type="Label" parent="CenterContainer/Panel/VBoxContainer/RadioRow"]
+size_flags_horizontal = 3
+text = "Рация"
+vertical_alignment = 1
+
+[node name="RadioPrice" type="Label" parent="CenterContainer/Panel/VBoxContainer/RadioRow"]
+custom_minimum_size = Vector2(50, 0)
+text = "$7"
+vertical_alignment = 1
+horizontal_alignment = 2
+
+[node name="RadioCount" type="Label" parent="CenterContainer/Panel/VBoxContainer/RadioRow"]
+custom_minimum_size = Vector2(40, 0)
+text = "x0"
+vertical_alignment = 1
+horizontal_alignment = 2
+
+[node name="RadioBuyButton" type="Button" parent="CenterContainer/Panel/VBoxContainer/RadioRow"]
+custom_minimum_size = Vector2(80, 0)
+text = "Купить"
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+
+[node name="CloseButton" type="Button" parent="CenterContainer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+text = "Закрыть"

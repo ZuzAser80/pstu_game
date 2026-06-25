@@ -12,6 +12,7 @@ const DAY_DURATION := 300.0
 @export var night_time_label : Label
 @export var day_time_label : Label
 @export var power_label : Label
+@export var money_label : Label
 @export var max_power : float = 100.0
 @export var power_drain_cam : float = 5.0
 @export var power_drain_radio : float = 10.0
@@ -21,17 +22,22 @@ const DAY_DURATION := 300.0
 @export var ai_list : Array[AI_Base]
 @export var all_rooms : Array[Room]
 @export var camera_system : CameraSystem
+@export var shop : Shop
 
 static var instance: GameModeManager
 static var shotgun_sheels : int = 0
 static var cam_repair_kit : int = 1
 static var radio : int = 0
+static var money : int = 0
+
+const NIGHT_REWARD := 10
 
 var is_freeroam := false
 var current_phase: Phase = Phase.DAY
 var phase_time: float = 0.0
 var current_power: float
 var power_depleted: bool = false
+var first_day := true
 
 func _ready() -> void:
 	instance = self
@@ -39,7 +45,9 @@ func _ready() -> void:
 	shotgun_sheels = start_shells;
 	cam_repair_kit = start_cam_repair_kit;
 	radio = start_radio;
-	_update_phase()
+	shop.shop_closed.connect(_on_shop_closed)
+	shop.visible = false
+	call_deferred("_delayed_start")
 
 func _process(delta: float) -> void:
 	phase_time += delta
@@ -66,7 +74,12 @@ func _update_phase() -> void:
 			ai.respawn_at_farthest_room()
 			ai.state_machine._transition_to_state(State.IDLE)
 	else:
+		if not first_day:
+			money += NIGHT_REWARD
+		else:
+			first_day = false
 		enable_freeroam()
+		shop.open()
 		for ai in ai_list:
 			ai.process_mode = PROCESS_MODE_DISABLED
 
@@ -85,6 +98,7 @@ func _update_time_display() -> void:
 	night_time_label.text = text
 	day_time_label.text = text
 	power_label.text = "PWR  %d%%" % [current_power]
+	money_label.text = "$%d" % [money]
 
 static func drain_power(amount: float) -> void:
 	if instance and not instance.power_depleted:
@@ -107,8 +121,19 @@ func _on_power_switch_interacted(_args: Dictionary) -> void:
 	restore_power()
 
 func _on_office_door_interacted(_args: Dictionary) -> void:
-	if current_phase == Phase.NIGHT and not power_depleted:
-		enable_office()
+	if current_phase == Phase.DAY:
+		current_phase = Phase.NIGHT
+		phase_time = 0.0
+		_update_phase()
+	elif is_freeroam:
+		if not power_depleted:
+			enable_office()
+
+func _delayed_start() -> void:
+	_update_phase()
+
+func _on_shop_closed() -> void:
+	shop.visible = false
 
 func _on_radio_place_interacted(args: Dictionary) -> void:
 	if radio <= 0:

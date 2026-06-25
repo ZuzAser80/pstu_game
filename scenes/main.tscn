@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://c5fektthy474" path="res://scripts/entity/ai_base.gd" id="8_tipki"]
 [ext_resource type="PackedScene" uid="uid://bi32okftrh2ht" path="res://scenes/base_room.tscn" id="9_0ld40"]
 [ext_resource type="Material" uid="uid://dct1v2aiicele" path="res://materials/new_standard_material_3d.tres" id="12_eb6dy"]
+[ext_resource type="Material" uid="uid://dixh2yisiw34v" path="res://materials/red.tres" id="12_fv21b"]
 [ext_resource type="PackedScene" uid="uid://bdxsyhnx0nlyq" path="res://models/enemies/zambie/manequin_-_low_poly_model.fbx" id="12_jscy8"]
 [ext_resource type="Script" uid="uid://byfxivg2ygl03" path="res://scripts/entity/states/attack_state.gd" id="12_trceg"]
 [ext_resource type="Script" uid="uid://dael6201n34td" path="res://scripts/entity/states/investigate_state.gd" id="13_ivst"]
@@ -27,7 +28,10 @@
 [ext_resource type="Script" uid="uid://cj6t3i7baijdq" path="res://scripts/misc/interactor.gd" id="17_muem4"]
 [ext_resource type="Script" uid="uid://cng5rv84le1jw" path="res://scripts/misc/distraction.gd" id="19_gqmmt"]
 [ext_resource type="Script" uid="uid://ddw8a5quq7qag" path="res://scripts/misc/time_overlay.gd" id="20_tol"]
-[ext_resource type="Script" path="res://scripts/entity/states/flee_state.gd" id="21_flee"]
+[ext_resource type="Script" uid="uid://wylddtiwbvgm" path="res://scripts/entity/states/flee_state.gd" id="21_flee"]
+[ext_resource type="PackedScene" uid="uid://dh7t7vaxvhh6k" path="res://scenes/shop.tscn" id="22_shop"]
+[ext_resource type="Script" uid="uid://d1jl43kwcto04" path="res://scripts/entity/states/chase_state.gd" id="24_qkpxi"]
+[ext_resource type="PackedScene" uid="uid://dj6jmkmel5c3t" path="res://models/misc/camera.gltf" id="30_tel4y"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_ya4ey"]
 vertices = PackedVector3Array(9.371603, 0.4290278, 0.8492832, 9.871603, 0.4290278, 0.5992832, 9.871603, 0.4290278, 0.09928322, 9.371603, 0.4290278, -0.15071678, 4.371603, 0.4290278, 3.0992832, 6.121603, 0.4290278, 2.8492832, 6.621603, 0.4290278, 3.3492832, 6.371603, 0.4290278, 4.349283, 6.871603, 0.4290278, 5.099283, -9.878397, 0.4290278, 11.099283, 4.621603, 0.4290278, 4.599283, 9.371603, 0.4290278, -9.150717, 10.121603, 0.4290278, -9.400717, 10.121603, 0.4290278, -11.150717, 10.121603, 0.4290278, 11.099283, 10.121603, 0.4290278, 9.349283, 9.371603, 0.4290278, 9.099283, 8.621603, 0.4290278, 3.0992832, -9.878397, 0.4290278, -11.150717, 8.871603, 0.4290278, 4.849283, 26.871603, 2.9290278, -2.1507168, 27.621603, 2.9290278, -2.1507168, 27.621603, 2.9290278, -3.4007168, 26.871603, 2.9290278, -2.4007168, 22.871603, 2.6790278, 8.349283, 22.871603, 2.9290278, 8.849283, 24.371603, 2.9290278, 8.849283, 23.621603, 2.9290278, 6.599283, 20.121603, 0.9290278, 6.599283, 20.371603, 0.4290278, 6.099283, 18.621603, 0.4290278, 5.599283, 18.621603, 0.4290278, 8.349283, 12.371603, 2.9290278, -3.1507168, 12.121603, 2.9290278, -2.9007168, 14.621603, 2.9290278, -2.9007168, 14.871603, 2.9290278, -3.4007168, 26.621603, 2.9290278, -2.9007168, 23.871603, 2.9290278, 2.8492832, 18.371603, 2.9290278, 2.8492832, 18.371603, 2.9290278, 3.0992832, 20.038269, 0.6790278, 8.349283, 24.121603, 2.9290278, 2.8492832, 17.871603, 2.9290278, 2.8492832, 15.371603, 2.9290278, -2.6507168, 23.871603, 2.9290278, 3.3492832, 21.121603, 2.9290278, -8.400717, 27.621603, 2.9290278, -8.400717, 27.621603, 2.9290278, -8.900717, 20.621603, 2.9290278, -8.650717, 9.871603, 2.9290278, -3.6507168, 10.121603, 2.9290278, -3.9007168, 10.121603, 2.9290278, -8.400717, 9.871603, 2.9290278, -8.900717, 14.621603, 2.9290278, -8.650717, 15.121603, 2.9290278, -8.400717, 15.371603, 2.9290278, -3.1507168, 21.371603, 2.9290278, -3.1507168, 20.871603, 2.9290278, -3.4007168, 17.621603, 2.9290278, 8.849283, 18.371603, 2.9290278, 8.849283, 17.621603, 0.4290278, -8.150717, 17.371603, 0.4290278, -8.900717, 16.871603, 0.4290278, -8.150717, 10.621603, 2.6790278, -3.9007168, 10.121603, 2.9290278, -2.6507168, 18.121603, 0.4290278, -3.6507168, 18.371603, 0.4290278, -2.9007168, 18.621603, 0.4290278, -2.9007168, 18.871603, 0.4290278, -3.6507168, 12.121603, 0.9290278, -6.900717, 12.621603, 0.4290278, -6.900717, 10.621603, 0.4290278, -8.150717, 15.621603, 0.4290278, -8.150717, 15.371603, 0.4290278, -6.150717, 12.371603, 0.4290278, -3.6507168, 14.371603, 0.4290278, -3.6507168, 14.371603, 0.4290278, -5.400717, 15.371603, 0.4290278, -5.650717, 14.371603, 0.4290278, -6.400717, 15.621603, 0.4290278, -3.6507168, 14.371603, 0.4290278, -8.150717, 20.371603, 0.4290278, -3.6507168, 20.371603, 0.4290278, -8.150717, 9.871603, 2.9290278, 8.849283, 10.371603, 2.9290278, 8.849283, 23.621603, 0.4290278, -2.9007168, 24.121603, 0.4290278, -2.9007168, 24.371603, 0.4290278, -3.6507168, 23.371603, 0.4290278, -3.6507168, 21.621603, 0.4290278, -8.150717, 21.621603, 0.4290278, -3.6507168, 27.121603, 0.4290278, -3.6507168, 27.121603, 0.4290278, -8.150717, 18.871603, 0.4290278, -2.4007168, 18.121603, 0.4290278, -2.4007168, 23.621603, 0.4290278, 2.3492832, 24.371603, 0.4290278, 0.5992832, 23.371603, 0.4290278, -2.4007168, 17.621603, 0.4290278, 0.5992832, 18.371603, 0.4290278, 2.3492832, 16.871603, 0.4290278, 0.34928322, 16.871603, 0.4290278, 0.5992832, 17.121603, 0.4290278, -0.40071678, 24.371603, 0.4290278, -2.4007168, 25.121603, 0.4290278, -0.6507168, 16.121603, 0.4290278, -2.4007168, 25.621603, 0.4290278, 0.34928322, 25.621603, 0.4290278, 0.09928322, 26.121603, 0.4290278, -2.4007168, 17.371603, 0.4290278, 4.849283, 17.871603, 0.4290278, 4.599283, 17.871603, 0.4290278, 4.349283, 17.371603, 0.4290278, 4.099283, 14.621603, 0.4290278, -2.4007168, 10.621603, 0.4290278, -2.4007168, 10.621603, 0.4290278, -0.15071678, 10.621603, 0.4290278, 0.8492832, 15.621603, 0.4290278, -0.15071678, 16.371603, 0.4290278, 1.3492832, 10.621603, 0.4290278, 8.349283, 17.371603, 0.4290278, 8.349283, 17.371603, 0.4290278, 2.8492832, 26.121603, 0.4290278, 0.34928322, 25.871603, 0.4290278, 1.0992832, 18.371603, 0.4290278, 4.349283, 18.621603, 0.4290278, 4.849283, 24.371603, 0.4290278, 4.599283, 24.621603, 0.4290278, 8.349283, 27.121603, 0.4290278, 8.349283, 27.121603, 0.4290278, -1.1507168, 24.371603, 0.4290278, 4.349283, 23.621603, 0.4290278, 4.349283, 23.371603, 0.4290278, 3.5992832, 23.371603, 0.4290278, 4.849283, 18.621603, 0.4290278, 3.5992832, 23.371603, 0.4290278, 6.349283, 24.621603, 0.4290278, 2.8492832, 4.871603, 2.6790278, 3.3492832, 4.871603, 2.6790278, 4.099283, 5.871603, 2.6790278, 4.099283, 5.871603, 2.6790278, 3.3492832, 7.121603, 2.4290278, 3.5992832, 7.121603, 2.4290278, 4.599283, 8.371603, 2.4290278, 4.599283, 8.371603, 2.4290278, 3.5992832)
@@ -50,6 +54,8 @@ viewport_path = NodePath("Sprite3D/TimeOverlay/OverlayViewport")
 [sub_resource type="SphereMesh" id="SphereMesh_tbgi4"]
 
 [sub_resource type="TubeTrailMesh" id="TubeTrailMesh_0ld40"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_yq6so"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2wyq8"]
 _data = {
@@ -88,7 +94,7 @@ NodePath("OfficeDoor"): NodePath("OfficeDoor/MeshInstance3D2"),
 NodePath("Camera/CameraViewport/Camera3D/Area3D3"): NodePath("Camera/CameraViewport/Camera3D/Area3D3/MeshInstance3D2")
 })
 
-[node name="GameModeManager" type="Node" parent="." unique_id=1711575424 node_paths=PackedStringArray("freeroam_controller", "office_controller", "night_light", "day_light", "night_time_label", "day_time_label", "power_label", "ai_list", "all_rooms", "camera_system")]
+[node name="GameModeManager" type="Node" parent="." unique_id=1711575424 node_paths=PackedStringArray("freeroam_controller", "office_controller", "night_light", "day_light", "night_time_label", "day_time_label", "power_label", "money_label", "ai_list", "all_rooms", "camera_system", "shop")]
 script = ExtResource("2_dp3eg")
 freeroam_controller = NodePath("../FreeroamController")
 office_controller = NodePath("../PlayerCam")
@@ -97,12 +103,11 @@ day_light = NodePath("../DirectionalLight3D")
 night_time_label = NodePath("../Sprite3D/TimeOverlay/OverlayViewport/CanvasLayer/NightTimeLabel")
 day_time_label = NodePath("../FreeroamController/FreeroamCam/CanvasLayer/Label")
 power_label = NodePath("../Sprite3D/TimeOverlay/OverlayViewport/CanvasLayer/PowerLabel")
-max_power = 100.0
-power_drain_cam = 5.0
-power_drain_radio = 10.0
+money_label = NodePath("../Sprite3D/TimeOverlay/OverlayViewport/CanvasLayer/MoneyLabel")
 ai_list = [NodePath("../AI_Base")]
 all_rooms = [NodePath("../Room"), NodePath("../Room2"), NodePath("../Room3"), NodePath("../Room4"), NodePath("../Room5")]
 camera_system = NodePath("../DirectionalLight3D")
+shop = NodePath("../Shop")
 metadata/_custom_type_script = "uid://7fnki0j8tex6"
 
 [node name="Timer" type="Timer" parent="GameModeManager" unique_id=1477087839]
@@ -153,7 +158,7 @@ script = ExtResource("17_muem4")
 metadata/_custom_type_script = "uid://cj6t3i7baijdq"
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1475930270]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24792838, 2.0287864, -4.404484)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24792838, 2.0287864, -3.6934438)
 texture = SubResource("ViewportTexture_sugp2")
 
 [node name="TimeOverlay" type="Node3D" parent="Sprite3D" unique_id=1607595948]
@@ -175,25 +180,39 @@ horizontal_alignment = 2
 vertical_alignment = 2
 
 [node name="PowerLabel" type="Label" parent="Sprite3D/TimeOverlay/OverlayViewport/CanvasLayer" unique_id=367151317]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -130.0
 offset_top = -30.0
 offset_right = -10.0
 offset_bottom = -10.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 30
 text = "PWR  100%"
 horizontal_alignment = 2
 vertical_alignment = 2
-theme_override_colors/font_color = Color(1.0, 0.8, 0.2, 1.0)
+
+[node name="MoneyLabel" type="Label" parent="Sprite3D/TimeOverlay/OverlayViewport/CanvasLayer" unique_id=367151318]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 10.0
+theme_override_colors/font_color = Color(0.3, 1, 0.3, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 1
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1.0)
+text = "$0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TimeSprite" type="Sprite3D" parent="Sprite3D/TimeOverlay" unique_id=1070143470]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.005)
 texture = SubResource("ViewportTexture_2wyq8")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=411017893]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47539008, 2.102591, -1.2940558)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47539008, 1.1800535, -1.2940558)
 collision_layer = 3
 collision_mask = 524291
 script = ExtResource("8_0ld40")
@@ -212,7 +231,7 @@ mesh = SubResource("SphereMesh_tbgi4")
 material = ExtResource("1_jyhfs")
 
 [node name="Area3D2" type="Area3D" parent="." unique_id=2080415148]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8810233, 2.102591, -1.2940558)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8810233, 1.189147, -1.2940558)
 collision_layer = 3
 collision_mask = 524291
 script = ExtResource("8_0ld40")
@@ -224,7 +243,7 @@ shape = SubResource("BoxShape3D_sugp2")
 debug_color = Color(0.9529412, 0.21960784, 0, 1)
 
 [node name="Area3D3" type="Area3D" parent="." unique_id=1078265946]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.41828692, 0.92547417, -1.2940558)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2506423, 0.92547417, -0.9060792)
 collision_layer = 3
 collision_mask = 524291
 script = ExtResource("8_0ld40")
@@ -237,13 +256,14 @@ debug_color = Color(0.9529412, 0.21960784, 0, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D3" unique_id=916728912]
 mesh = SubResource("TubeTrailMesh_0ld40")
+surface_material_override/0 = ExtResource("12_fv21b")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Area3D3" unique_id=1946661520]
 mesh = SubResource("TubeTrailMesh_0ld40")
 surface_material_override/0 = ExtResource("1_jyhfs")
 
-[node name="PowerSwitch" type="Area3D" parent="." unique_id=367151318]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0, 1.5, 4.0)
+[node name="PowerSwitch" type="Area3D" parent="." unique_id=1138907395]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.5, 4)
 collision_layer = 3
 collision_mask = 524291
 script = ExtResource("8_0ld40")
@@ -255,31 +275,33 @@ debug_color = Color(0.9529412, 0.21960784, 0, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PowerSwitch" unique_id=367151321]
 mesh = SubResource("SphereMesh_tbgi4")
+surface_material_override/0 = ExtResource("12_eb6dy")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="PowerSwitch" unique_id=367151322]
 mesh = SubResource("SphereMesh_tbgi4")
 surface_material_override/0 = ExtResource("1_jyhfs")
 
 [node name="OfficeDoor" type="Area3D" parent="." unique_id=367151319]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0078099, 1.3, 1.4118998)
 collision_layer = 3
 collision_mask = 524291
 script = ExtResource("8_0ld40")
 metadata/type = "office_door"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="OfficeDoor" unique_id=367151323]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0051956177)
 shape = SubResource("BoxShape3D_sugp2")
 debug_color = Color(0.9529412, 0.21960784, 0, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="OfficeDoor" unique_id=367151324]
-mesh = SubResource("SphereMesh_tbgi4")
+mesh = SubResource("BoxMesh_yq6so")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="OfficeDoor" unique_id=367151325]
 mesh = SubResource("SphereMesh_tbgi4")
 surface_material_override/0 = ExtResource("1_jyhfs")
 
 [node name="Area3D4" type="Area3D" parent="." unique_id=411017894]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.475, 1.5, -1.294)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5035672, 2.5834675, -1.294)
 collision_layer = 3
 collision_mask = 524291
 script = ExtResource("8_0ld40")
@@ -289,7 +311,7 @@ metadata/number = 2
 shape = SubResource("BoxShape3D_sugp2")
 debug_color = Color(0.9529412, 0.21960784, 0, 1)
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="Area3D4" unique_id=1808337848]
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Area3D4" unique_id=1224757405]
 mesh = SubResource("SphereMesh_tbgi4")
 
 [node name="CSGMesh3D2" type="CSGMesh3D" parent="Area3D4" unique_id=2000202120]
@@ -298,7 +320,7 @@ mesh = SubResource("SphereMesh_tbgi4")
 material = ExtResource("1_jyhfs")
 
 [node name="Area3D5" type="Area3D" parent="." unique_id=2080415149]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.881, 1.5, -1.294)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.015288, 0.95810616, -0.20276582)
 collision_layer = 3
 collision_mask = 524291
 script = ExtResource("8_0ld40")
@@ -318,7 +340,7 @@ mesh = SubResource("SphereMesh_tbgi4")
 material = ExtResource("1_jyhfs")
 
 [node name="Area3D6" type="Area3D" parent="." unique_id=2080415150]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.475, 0.95, -1.294)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5035672, 0.95, -1.294)
 collision_layer = 3
 collision_mask = 524291
 script = ExtResource("8_0ld40")
@@ -386,6 +408,10 @@ script = ExtResource("21_flee")
 [node name="InvestigateState" type="Node" parent="AI_Base/NavigationAgent3D/StateMachine" unique_id=1139340982]
 script = ExtResource("13_ivst")
 
+[node name="ChaseState" type="Node" parent="AI_Base/NavigationAgent3D/StateMachine" unique_id=529462142]
+script = ExtResource("24_qkpxi")
+metadata/_custom_type_script = "uid://d1jl43kwcto04"
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="AI_Base" unique_id=283592367]
 mesh = SubResource("CapsuleMesh_ya4ey")
 surface_material_override/0 = ExtResource("12_eb6dy")
@@ -411,7 +437,8 @@ metadata/_custom_type_script = "uid://cj6t3i7baijdq"
 [node name="CanvasLayer" type="CanvasLayer" parent="FreeroamController/FreeroamCam" unique_id=1985661648]
 
 [node name="Crosshair" type="TextureRect" parent="FreeroamController/FreeroamCam/CanvasLayer" unique_id=367151327]
-anchors_preset = 12
+visible = false
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -420,7 +447,6 @@ offset_left = -16.0
 offset_top = -16.0
 offset_right = 16.0
 offset_bottom = 16.0
-visible = false
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="FreeroamController/FreeroamCam/CanvasLayer" unique_id=263564093]
@@ -465,22 +491,22 @@ metadata/_custom_type_script = "uid://cng5rv84le1jw"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8265944, 0, -3.4435697)
 
 [node name="Room3" parent="." unique_id=367151340 node_paths=PackedStringArray("spots", "neighbors") instance=ExtResource("9_0ld40")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0, 1.1583791, 5.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6004333, 1.1583791, 3.6006746)
 spots = [NodePath("Node3D"), NodePath("Node3D2")]
 neighbors = [NodePath("../Room"), NodePath("../Room4")]
 distance_to_office = 2
 
 [node name="Node3D" type="Node3D" parent="Room3" unique_id=367151343]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -0.73, 3.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.73, 3)
 
 [node name="Node3D2" type="Node3D" parent="Room3" unique_id=367151344]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0, -0.73, 1.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -0.73, 1)
 
 [node name="Distraction" type="Node3D" parent="Room3" unique_id=367151360 node_paths=PackedStringArray("room")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.0, 2.0)
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 script = ExtResource("19_gqmmt")
 room = NodePath("..")
-process_mode = 4
 
 [node name="RadioPlacementSpot" type="Area3D" parent="Room3" unique_id=367151361]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.3, 1.5)
@@ -492,7 +518,7 @@ metadata/camera_index = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room3/RadioPlacementSpot" unique_id=367151362]
 shape = SubResource("BoxShape3D_sugp2")
-debug_color = Color(0, 0.8, 0, 1)
+debug_color = Color(0.9529412, 0.21960784, 0, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Room3/RadioPlacementSpot" unique_id=367151363]
 mesh = SubResource("SphereMesh_tbgi4")
@@ -503,25 +529,25 @@ mesh = SubResource("SphereMesh_tbgi4")
 surface_material_override/0 = ExtResource("1_jyhfs")
 
 [node name="Room4" parent="." unique_id=367151341 node_paths=PackedStringArray("spots", "neighbors") instance=ExtResource("9_0ld40")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0, 1.1583791, 2.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.1583791, 2)
 spots = [NodePath("Node3D"), NodePath("Node3D2")]
 neighbors = [NodePath("../Room3")]
 distance_to_office = 3
 
 [node name="Node3D" type="Node3D" parent="Room4" unique_id=367151345]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -0.73, 2.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.73, 2)
 
 [node name="Node3D2" type="Node3D" parent="Room4" unique_id=367151346]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0, -0.73, 0.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.73, 0)
 
 [node name="Distraction" type="Node3D" parent="Room4" unique_id=367151370 node_paths=PackedStringArray("room")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0, 0.0, 1.0)
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
 script = ExtResource("19_gqmmt")
 room = NodePath("..")
-process_mode = 4
 
 [node name="RadioPlacementSpot" type="Area3D" parent="Room4" unique_id=367151371]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0.3, 1.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0.3, 1)
 collision_layer = 3
 collision_mask = 524291
 script = ExtResource("8_0ld40")
@@ -530,7 +556,7 @@ metadata/camera_index = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room4/RadioPlacementSpot" unique_id=367151372]
 shape = SubResource("BoxShape3D_sugp2")
-debug_color = Color(0, 0.8, 0, 1)
+debug_color = Color(0.9529412, 0.21960784, 0, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Room4/RadioPlacementSpot" unique_id=367151373]
 mesh = SubResource("SphereMesh_tbgi4")
@@ -541,25 +567,25 @@ mesh = SubResource("SphereMesh_tbgi4")
 surface_material_override/0 = ExtResource("1_jyhfs")
 
 [node name="Room5" parent="." unique_id=367151342 node_paths=PackedStringArray("spots", "neighbors") instance=ExtResource("9_0ld40")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.0, 1.1583791, -10.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.66956, 1.1583791, -4.148024)
 spots = [NodePath("Node3D"), NodePath("Node3D2")]
 neighbors = [NodePath("../Room2")]
 distance_to_office = 3
 
 [node name="Node3D" type="Node3D" parent="Room5" unique_id=367151347]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -0.73, -2.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.73, -2)
 
 [node name="Node3D2" type="Node3D" parent="Room5" unique_id=367151348]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0, -0.73, -4.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -0.73, -4)
 
 [node name="Distraction" type="Node3D" parent="Room5" unique_id=367151380 node_paths=PackedStringArray("room")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0, 0.0, -2.0)
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
 script = ExtResource("19_gqmmt")
 room = NodePath("..")
-process_mode = 4
 
 [node name="RadioPlacementSpot" type="Area3D" parent="Room5" unique_id=367151381]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.3, -3.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.3, -3)
 collision_layer = 3
 collision_mask = 524291
 script = ExtResource("8_0ld40")
@@ -568,7 +594,7 @@ metadata/camera_index = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room5/RadioPlacementSpot" unique_id=367151382]
 shape = SubResource("BoxShape3D_sugp2")
-debug_color = Color(0, 0.8, 0, 1)
+debug_color = Color(0.9529412, 0.21960784, 0, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Room5/RadioPlacementSpot" unique_id=367151383]
 mesh = SubResource("SphereMesh_tbgi4")
@@ -646,6 +672,7 @@ shape = SubResource("BoxShape3D_sugp2")
 debug_color = Color(0.9529412, 0.21960784, 0, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Camera2/CameraViewport/Camera3D/Area3D3" unique_id=948277079]
+visible = false
 mesh = SubResource("TubeTrailMesh_0ld40")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Camera2/CameraViewport/Camera3D/Area3D3" unique_id=1054426428]
@@ -672,12 +699,11 @@ metadata/visual = true
 metadata/audio = false
 
 [node name="Camera3D" type="Camera3D" parent="Camera3/CameraViewport" unique_id=754528297]
-transform = Transform3D(1, 0, 0, 0, 0.707, -0.707, 0, 0.707, 0.707, -2, 5, 9)
+transform = Transform3D(1, 0, 0, 0, 0.90709066, 0.42057645, 0, -0.42057645, 0.90709066, -2, 5, 9)
 current = true
 fov = 108.7
 
 [node name="Area3D3" type="Area3D" parent="Camera3/CameraViewport/Camera3D" unique_id=1547906789]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 collision_layer = 3
 collision_mask = 524291
 script = ExtResource("8_0ld40")
@@ -689,12 +715,16 @@ shape = SubResource("BoxShape3D_sugp2")
 debug_color = Color(0.9529412, 0.21960784, 0, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3/CameraViewport/Camera3D/Area3D3" unique_id=948277080]
+visible = false
 mesh = SubResource("TubeTrailMesh_0ld40")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Camera3/CameraViewport/Camera3D/Area3D3" unique_id=1054426429]
 visible = false
 mesh = SubResource("TubeTrailMesh_0ld40")
 surface_material_override/0 = ExtResource("1_jyhfs")
+
+[node name="blockbench_export" parent="Camera3/CameraViewport/Camera3D/Area3D3" unique_id=1330489305 instance=ExtResource("30_tel4y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2502752, 0.357847)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera3/CameraViewport" unique_id=273323046]
 
@@ -715,12 +745,11 @@ metadata/visual = true
 metadata/audio = false
 
 [node name="Camera3D" type="Camera3D" parent="Camera4/CameraViewport" unique_id=754528298]
-transform = Transform3D(1, 0, 0, 0, 0.707, -0.707, 0, 0.707, 0.707, -5, 5, 6)
+transform = Transform3D(0.10881478, 0.42646477, -0.89776886, -3.7252903e-09, 0.90313154, 0.4290123, 0.9940621, -0.046682872, 0.09827407, -10.145676, 5.151491, 3.404839)
 current = true
 fov = 108.7
 
 [node name="Area3D3" type="Area3D" parent="Camera4/CameraViewport/Camera3D" unique_id=1547906790]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 collision_layer = 3
 collision_mask = 524291
 script = ExtResource("8_0ld40")
@@ -732,12 +761,16 @@ shape = SubResource("BoxShape3D_sugp2")
 debug_color = Color(0.9529412, 0.21960784, 0, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Camera4/CameraViewport/Camera3D/Area3D3" unique_id=948277081]
+visible = false
 mesh = SubResource("TubeTrailMesh_0ld40")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Camera4/CameraViewport/Camera3D/Area3D3" unique_id=1054426430]
 visible = false
 mesh = SubResource("TubeTrailMesh_0ld40")
 surface_material_override/0 = ExtResource("1_jyhfs")
+
+[node name="blockbench_export" parent="Camera4/CameraViewport/Camera3D/Area3D3" unique_id=997818674 instance=ExtResource("30_tel4y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2502752, 0.357847)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera4/CameraViewport" unique_id=273323047]
 
@@ -758,12 +791,11 @@ metadata/visual = true
 metadata/audio = false
 
 [node name="Camera3D" type="Camera3D" parent="Camera5/CameraViewport" unique_id=754528299]
-transform = Transform3D(1, 0, 0, 0, 0.707, -0.707, 0, 0.707, 0.707, 20, 5, -6)
+transform = Transform3D(-0.962256, 0.21531607, -0.1663732, 0.025596991, 0.6802344, 0.73234165, 0.2709395, 0.70044136, -0.6600712, 20.268293, 4.913682, -6.0863194)
 current = true
 fov = 108.7
 
 [node name="Area3D3" type="Area3D" parent="Camera5/CameraViewport/Camera3D" unique_id=1547906791]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 collision_layer = 3
 collision_mask = 524291
 script = ExtResource("8_0ld40")
@@ -775,6 +807,7 @@ shape = SubResource("BoxShape3D_sugp2")
 debug_color = Color(0.9529412, 0.21960784, 0, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Camera5/CameraViewport/Camera3D/Area3D3" unique_id=948277082]
+visible = false
 mesh = SubResource("TubeTrailMesh_0ld40")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Camera5/CameraViewport/Camera3D/Area3D3" unique_id=1054426431]
@@ -792,24 +825,26 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Shop" parent="." unique_id=919579032 instance=ExtResource("22_shop")]
+
 [connection signal="clicked_closeup" from="PlayerCam" to="DirectionalLight3D" method="_on_player_cam_clicked_closeup"]
 [connection signal="on_hover_end" from="PlayerCam/Interactor" to="." method="_turn_off"]
 [connection signal="on_hover_start" from="PlayerCam/Interactor" to="." method="_turn_on"]
 [connection signal="on_interact" from="Area3D" to="DirectionalLight3D" method="trigger_cam"]
 [connection signal="on_interact" from="Area3D2" to="DirectionalLight3D" method="trigger_cam"]
 [connection signal="on_interact" from="Area3D3" to="DirectionalLight3D" method="trigger_radio"]
-[connection signal="on_hover_end" from="FreeroamController/FreeroamCam/Interactor" to="." method="_turn_off"]
-[connection signal="on_hover_start" from="FreeroamController/FreeroamCam/Interactor" to="." method="_turn_on"]
-[connection signal="on_interact" from="Camera/CameraViewport/Camera3D/Area3D3" to="DirectionalLight3D" method="repair_cam"]
-[connection signal="on_interact" from="Camera2/CameraViewport/Camera3D/Area3D3" to="DirectionalLight3D" method="repair_cam"]
 [connection signal="on_interact" from="PowerSwitch" to="GameModeManager" method="_on_power_switch_interacted"]
 [connection signal="on_interact" from="OfficeDoor" to="GameModeManager" method="_on_office_door_interacted"]
 [connection signal="on_interact" from="Area3D4" to="DirectionalLight3D" method="trigger_cam"]
 [connection signal="on_interact" from="Area3D5" to="DirectionalLight3D" method="trigger_cam"]
 [connection signal="on_interact" from="Area3D6" to="DirectionalLight3D" method="trigger_cam"]
-[connection signal="on_interact" from="Camera3/CameraViewport/Camera3D/Area3D3" to="DirectionalLight3D" method="repair_cam"]
-[connection signal="on_interact" from="Camera4/CameraViewport/Camera3D/Area3D3" to="DirectionalLight3D" method="repair_cam"]
-[connection signal="on_interact" from="Camera5/CameraViewport/Camera3D/Area3D3" to="DirectionalLight3D" method="repair_cam"]
+[connection signal="on_hover_end" from="FreeroamController/FreeroamCam/Interactor" to="." method="_turn_off"]
+[connection signal="on_hover_start" from="FreeroamController/FreeroamCam/Interactor" to="." method="_turn_on"]
 [connection signal="on_interact" from="Room3/RadioPlacementSpot" to="GameModeManager" method="_on_radio_place_interacted"]
 [connection signal="on_interact" from="Room4/RadioPlacementSpot" to="GameModeManager" method="_on_radio_place_interacted"]
 [connection signal="on_interact" from="Room5/RadioPlacementSpot" to="GameModeManager" method="_on_radio_place_interacted"]
+[connection signal="on_interact" from="Camera/CameraViewport/Camera3D/Area3D3" to="DirectionalLight3D" method="repair_cam"]
+[connection signal="on_interact" from="Camera2/CameraViewport/Camera3D/Area3D3" to="DirectionalLight3D" method="repair_cam"]
+[connection signal="on_interact" from="Camera3/CameraViewport/Camera3D/Area3D3" to="DirectionalLight3D" method="repair_cam"]
+[connection signal="on_interact" from="Camera4/CameraViewport/Camera3D/Area3D3" to="DirectionalLight3D" method="repair_cam"]
+[connection signal="on_interact" from="Camera5/CameraViewport/Camera3D/Area3D3" to="DirectionalLight3D" method="repair_cam"]

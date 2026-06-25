@@ -22,9 +22,10 @@ func _select_attack_target() -> void:
 		transitioned.emit(IDLE) 
 		return
 	print("selected:", target.name)
-	if target.type == Breakable.BreakableType.Door:
-		print("door hit, should transition into chase but slower idk")
 	target._break()
+	if target.type == Breakable.BreakableType.Door and ai_base.target_player != null:
+		transitioned.emit(CHASE)
+		return
 	if randi_range(0, 2) == 1:
 		transitioned.emit(IDLE)
 	else:
