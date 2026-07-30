@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bi70u2eacckhn"]
+
+[ext_resource type="Shader" path="res://materials/books.gdshader" id="1_gdshdr"]
+[ext_resource type="Texture2D" uid="uid://crex2s5f7cto5" path="res://materials/books.png" id="2_k11qa"]
+
+[resource]
+shader = ExtResource("1_gdshdr")
+shader_parameter/albedo_texture = ExtResource("2_k11qa")
+shader_parameter/uv1_scale = Vector3(10, 10, 10)
+shader_parameter/uv1_offset = Vector3(0.28, 0, 0)

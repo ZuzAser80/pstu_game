@@ -5,9 +5,10 @@ func _ready() -> void:
 
 func enter(_char_reference : AI_Base):
 	super.enter(_char_reference)
-	print("advance entered")
 	if ai_base.current_room.distance_to_office == 1:
-		transitioned.emit(CHASE)
+		#todo: remove
+		ai_base.retreating = true;
+		transitioned.emit(ADVANCE)
 		return
 	_select_room();
 	if ai_base._move_to_target_room():
@@ -39,7 +40,6 @@ func _stop() -> void:
 	transitioned.emit(IDLE);
 
 func exit():
-	print("advance exited")
 	if ai_base.on_reached_target.is_connected(_stop):
 		ai_base.on_reached_target.disconnect(_stop)
 	

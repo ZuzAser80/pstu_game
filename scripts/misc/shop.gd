@@ -37,29 +37,29 @@ func _close():
 	shop_closed.emit()
 
 func _refresh():
-	money_label.text = "Деньги: $%d" % GameModeManager.money
-	shell_count_label.text = "x%d" % GameModeManager.shotgun_sheels
-	repair_kit_count_label.text = "x%d" % GameModeManager.cam_repair_kit
-	radio_count_label.text = "x%d" % GameModeManager.radio
+	money_label.text = "Деньги: $%d" % GameModeManager.instance.inventory_manager.money
+	shell_count_label.text = "x%d" % GameModeManager.instance.inventory_manager.shotgun_shells
+	repair_kit_count_label.text = "x%d" % GameModeManager.instance.inventory_manager.cam_repair_kit
+	radio_count_label.text = "x%d" % GameModeManager.instance.inventory_manager.radio
 
-	shell_buy_button.disabled = GameModeManager.money < shell_price
-	repair_kit_buy_button.disabled = GameModeManager.money < repair_kit_price
-	radio_buy_button.disabled = GameModeManager.money < radio_price
+	shell_buy_button.disabled = GameModeManager.instance.inventory_manager.money < shell_price
+	repair_kit_buy_button.disabled = GameModeManager.instance.inventory_manager.money < repair_kit_price
+	radio_buy_button.disabled = GameModeManager.instance.inventory_manager.money < radio_price
 
 func _buy_shells():
-	if GameModeManager.money >= shell_price:
-		GameModeManager.money -= shell_price
-		GameModeManager.shotgun_sheels += 1
+	if GameModeManager.instance.inventory_manager.money >= shell_price:
+		GameModeManager.instance.inventory_manager.money -= shell_price
+		GameModeManager.instance.inventory_manager.shotgun_shells += 1
 		_refresh()
 
 func _buy_repair_kit():
-	if GameModeManager.money >= repair_kit_price:
-		GameModeManager.money -= repair_kit_price
-		GameModeManager.cam_repair_kit += 1
+	if GameModeManager.instance.inventory_manager.money >= repair_kit_price:
+		GameModeManager.instance.inventory_manager.money -= repair_kit_price
+		GameModeManager.instance.inventory_manager.cam_repair_kit += 1
 		_refresh()
 
 func _buy_radio():
-	if GameModeManager.money >= radio_price:
-		GameModeManager.money -= radio_price
-		GameModeManager.radio += 1
+	if GameModeManager.instance.inventory_manager.money >= radio_price:
+		GameModeManager.instance.inventory_manager.money -= radio_price
+		GameModeManager.instance.inventory_manager.radio += 1
 		_refresh()

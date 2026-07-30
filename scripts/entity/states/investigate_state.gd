@@ -5,7 +5,6 @@ func _ready() -> void:
 
 func enter(_char_reference : AI_Base):
 	super.enter(_char_reference);
-	print("entering investigative state, room: ", ai_base.target_room)
 	if ai_base.target_room == null:
 		transitioned.emit(IDLE)
 		return

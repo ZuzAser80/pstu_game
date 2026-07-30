@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b5f43owbcgkca"]
+
+[ext_resource type="Texture2D" uid="uid://bwchrj84jj211" path="res://materials/wood_plate.png" id="1_mqqr4"]
+
+[resource]
+albedo_texture = ExtResource("1_mqqr4")
+uv1_scale = Vector3(0.76, 0.76, 0.76)
+uv1_offset = Vector3(0.28, 0, 0)
+texture_filter = 0

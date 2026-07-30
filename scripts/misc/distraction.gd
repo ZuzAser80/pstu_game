@@ -6,6 +6,7 @@ class_name Distraction extends Node3D
 func _ready() -> void:
 	if room == null:
 		room = _find_parent_room()
+	#_update_sphere()
 
 func activate() -> void:
 	if room == null:

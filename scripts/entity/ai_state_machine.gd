@@ -1,11 +1,7 @@
 class_name StateMachine extends Node
 
-@export var initial_state : State = null;
-#@export var states : Array[State];
 @onready var current_state : State = get_node("IdleState");
 @export var ai_base : AI_Base;
-
-var last_state;
 
 func _ready() -> void:
 	for state_node: State in find_children("*", "State"):
@@ -22,11 +18,9 @@ func _physics_process(delta: float) -> void:
 
 func _transition_to_state(newState : String) -> void:
 	if not has_node(newState):
-		print("err, wrong transition path:", newState)
 		return	
 
 	current_state.exit();
-	last_state = current_state;
 
 	var new_state = get_node(newState);
 

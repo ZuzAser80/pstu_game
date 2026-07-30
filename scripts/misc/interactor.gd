@@ -9,7 +9,7 @@ class_name Interactor extends Node3D
 
 var can_interact : bool = true;
 var current_collider : CollisionObject3D;
-var shogun_out : bool = false;
+var shotgun_out : bool = false;
 
 signal on_hover_start(collider);
 signal on_hover_end(collider);
@@ -33,12 +33,14 @@ func _handle_hover(_event: InputEvent) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	_handle_hover(event);
 	_handle_mouse_button(event);
+	_handle_shotgun(event)
 
 func _handle_shotgun(event : InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.keycode == KEY_Q:
-		shogun_out = !shogun_out
+		shotgun_out = !shotgun_out
+		shotgun.visible = shotgun_out
 		shotgun.process_mode =  Node.PROCESS_MODE_ALWAYS if shotgun.process_mode == Node.PROCESS_MODE_DISABLED else Node.PROCESS_MODE_DISABLED
-		crosshair.visible = shogun_out
+		crosshair.visible = shotgun_out
 
 func _shotgun_raycast() -> void:
 	var mouse_pos = get_viewport().get_mouse_position()
@@ -51,10 +53,9 @@ func _shotgun_raycast() -> void:
 
 func _handle_mouse_button(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		if shogun_out and GameModeManager.shotgun_sheels > 1:
-			print("kaboom kablow")
-			GameModeManager.shotgun_sheels -= 1
-			shogun_out = false
+		if shotgun_out and GameModeManager.instance.inventory_manager.shotgun_shells > 1:
+			GameModeManager.instance.inventory_manager.shotgun_shells -= 1
+			shotgun_out = false
 			shotgun.process_mode = Node.PROCESS_MODE_DISABLED
 			crosshair.visible = false
 			_shotgun_raycast()

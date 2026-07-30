@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c3e8iemthboj2"]
+
+[ext_resource type="Texture2D" uid="uid://d168magyplirr" path="res://materials/fabric.png" id="1_ic2m3"]
+
+[resource]
+albedo_texture = ExtResource("1_ic2m3")
+metallic_specular = 0.4
+uv1_scale = Vector3(3, 3, 3)
+texture_filter = 0

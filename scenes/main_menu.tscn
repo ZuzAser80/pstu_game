@@ -7,7 +7,7 @@
 script = ExtResource("2")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2014335331]
-transform = Transform3D(0.5, -0.5, 0, 0.5, 0.5, 0, 0, 0, 1, 0, 10, 0)
+transform = Transform3D(0.49999994, 0.06645684, -0.700833, 0.49999994, -0.06645684, 0.700833, 0, -0.700833, -0.13291372, 0, 10, 0)
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=2054834839]
 

@@ -6,14 +6,18 @@ class_name Room
 @export var neighbors : Array[Room];
 @export var targets : Array[Breakable];
 @onready var distraction := $Distraction;
+@onready var camera := $CameraViewport;
 
 @export var distance_to_office : int;
 
 var reserved_spots : Array[Node3D] = [];
 
+func _valid_neighbors() -> Array[Room]:
+	return neighbors.filter(func(r): return r != null)
+
 func get_neighbors(advance : bool) -> Array[Room]:
 	var res : Array[Room];
-	for r in neighbors:
+	for r in _valid_neighbors():
 		if advance:
 			if r.distance_to_office < distance_to_office:
 				res.append(r);
@@ -23,7 +27,7 @@ func get_neighbors(advance : bool) -> Array[Room]:
 	return res;
 
 func get_all_neighbors() -> Array[Room]:
-	return neighbors
+	return _valid_neighbors()
 
 func get_available_spot() -> Node3D:
 	var available : Array[Node3D] = [];

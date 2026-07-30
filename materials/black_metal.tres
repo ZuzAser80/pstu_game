@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b33br1vadn0cg"]
+
+[ext_resource type="Texture2D" uid="uid://lfqk0ojky4c7" path="res://materials/black_metal.png" id="1_j5ran"]
+
+[resource]
+albedo_texture = ExtResource("1_j5ran")
+metallic = 1.0
+metallic_specular = 0.32
+metallic_texture = ExtResource("1_j5ran")
+uv1_scale = Vector3(3, 3, 3)
+texture_filter = 0

@@ -5,11 +5,8 @@ class_name AI_Base
 @export var hostility_level : int;
 @export var aggravation : int;
 @export var movement_speed : float;
-@export var movement_aggravation_multiplier : float = 1;
 
 @export var current_room : Room;
-@export var detection_radius : float;
-@export var detection_timer_wait : int;
 @export var anim : AnimationPlayer;
 @export var anim_idle : String = "idle";
 @export var anim_walk : String = "walking";
@@ -22,10 +19,8 @@ class_name AI_Base
 
 var target_room : Room;
 var target_player : FreeroamController;
-var physics_delta : float;
 var should_move : bool = false;
 var retreating : bool = false;
-var target_breakable : Breakable;
 
 var reserved_spot : Node3D;
 var reserved_room : Room;
@@ -63,11 +58,8 @@ func _move_to_target_room() -> bool:
 	_release_current_spot()
 	var spot = _reserve_spot_in(target_room)
 	if spot == null:
-		print("No available spots in:", target_room.name)
 		return false
-	print("Moving from:", current_room.name, "to:", target_room.name)
 	nav_agent.target_position = spot.global_position;
-	print(nav_agent.target_position)
 	if not nav_agent.target_reached.is_connected(_on_move_completion):
 		nav_agent.target_reached.connect(_on_move_completion);
 	return true
@@ -87,7 +79,6 @@ func _face_direction(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if not should_move: return
-	physics_delta = delta
 	_face_direction(delta)
 	var next_path_position: Vector3 = nav_agent.get_next_path_position()
 	var new_velocity: Vector3 = global_position.direction_to(next_path_position) * movement_speed * (0.2 * hostility_level)

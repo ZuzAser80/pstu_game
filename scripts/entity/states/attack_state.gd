@@ -12,16 +12,13 @@ func enter(_char_reference : AI_Base):
 		_select_attack_target()
 
 func _attack_player() -> void:
-	print("attacking player")
 	GameModeManager.trigger_game_over()
 
 func _select_attack_target() -> void:
-	print("selecting target...")
 	var target = ai_base.current_room.targets.pick_random()
 	if target == null: 
 		transitioned.emit(IDLE) 
 		return
-	print("selected:", target.name)
 	target._break()
 	if target.type == Breakable.BreakableType.Door and ai_base.target_player != null:
 		transitioned.emit(CHASE)

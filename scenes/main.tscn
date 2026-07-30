@@ -1,15 +1,19 @@
 [gd_scene format=3 uid="uid://cxwt2lcl313xd"]
 
 [ext_resource type="Material" uid="uid://byr736ycqbs81" path="res://materials/simple_outline.tres" id="1_jyhfs"]
+[ext_resource type="Script" uid="uid://rrd1l5gkq6em" path="res://scripts/systems/power_manager.gd" id="1_power"]
 [ext_resource type="Script" uid="uid://db82qfoqrxidm" path="res://scripts/misc/highlight_manager.gd" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://b2kfpk05e4ucs" path="res://scripts/office/office_cam.gd" id="2_0wfyh"]
-[ext_resource type="Script" uid="uid://7fnki0j8tex6" path="res://scripts/misc/game_mode.gd" id="2_dp3eg"]
-[ext_resource type="Script" uid="uid://xugqeqysykh5" path="res://scripts/office/office_ui_controller.gd" id="3_2wyq8"]
+[ext_resource type="Script" uid="uid://bbuxxs8hphitq" path="res://scripts/systems/game_mode.gd" id="2_dp3eg"]
+[ext_resource type="Script" uid="uid://cioau4hnfkkcd" path="res://scripts/ui/freeroam_ui_manager.gd" id="2_freeroamui"]
+[ext_resource type="Script" uid="uid://cfdey366660nv" path="res://scripts/ui/office_ui_manager.gd" id="3_2wyq8"]
 [ext_resource type="Script" uid="uid://bh7q6bb12tdsl" path="res://scripts/misc/breakable.gd" id="3_a8y0u"]
+[ext_resource type="Script" uid="uid://41p627wu4gks" path="res://scripts/systems/inventory_manager.gd" id="3_invmgmt"]
 [ext_resource type="Script" uid="uid://deiw3155qusc4" path="res://scripts/office/camera_system.gd" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bwbli04okelba" path="res://models/environment/first_floor.glb" id="4_gqmmt"]
 [ext_resource type="Texture2D" uid="uid://bd1h1jgdfo860" path="res://materials/budka.png" id="4_og1vs"]
 [ext_resource type="Script" uid="uid://0f752tg6ys4m" path="res://scripts/entity/ai_state_machine.gd" id="5_tefeu"]
+[ext_resource type="PackedScene" uid="uid://bue5ahstmdjw2" path="res://models/misc/shotgun.gltf" id="6_kmb1v"]
 [ext_resource type="Script" uid="uid://cq8lujpb4pnwc" path="res://scripts/entity/states/idle_state.gd" id="6_tefeu"]
 [ext_resource type="Script" uid="uid://c58oxvpe0vxcf" path="res://scripts/entity/states/advance_state.gd" id="7_o6xl0"]
 [ext_resource type="Shader" uid="uid://cdg8p6x7brude" path="res://shaders/vhs_shader.gdshader" id="7_yc10j"]
@@ -32,19 +36,22 @@
 [ext_resource type="PackedScene" uid="uid://dh7t7vaxvhh6k" path="res://scenes/shop.tscn" id="22_shop"]
 [ext_resource type="Script" uid="uid://d1jl43kwcto04" path="res://scripts/entity/states/chase_state.gd" id="24_qkpxi"]
 [ext_resource type="PackedScene" uid="uid://dj6jmkmel5c3t" path="res://models/misc/camera.gltf" id="30_tel4y"]
+[ext_resource type="Animation" uid="uid://b4jgmxwnobxhy" path="res://materials/shotgun_reload.res" id="32_pibwh"]
+[ext_resource type="PackedScene" uid="uid://dkrl83riqpu7e" path="res://models/misc/builing.gltf" id="37_fuf3a"]
+[ext_resource type="PackedScene" uid="uid://co0lojws47fqi" path="res://models/misc/chair.gltf" id="39_c6pm6"]
+[ext_resource type="PackedScene" uid="uid://dnvyups3fbfrs" path="res://models/misc/table.gltf" id="40_5he1u"]
+[ext_resource type="PackedScene" uid="uid://n3yes1bdlg0t" path="res://models/misc/shelf.gltf" id="41_5poiv"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_ya4ey"]
-vertices = PackedVector3Array(9.371603, 0.4290278, 0.8492832, 9.871603, 0.4290278, 0.5992832, 9.871603, 0.4290278, 0.09928322, 9.371603, 0.4290278, -0.15071678, 4.371603, 0.4290278, 3.0992832, 6.121603, 0.4290278, 2.8492832, 6.621603, 0.4290278, 3.3492832, 6.371603, 0.4290278, 4.349283, 6.871603, 0.4290278, 5.099283, -9.878397, 0.4290278, 11.099283, 4.621603, 0.4290278, 4.599283, 9.371603, 0.4290278, -9.150717, 10.121603, 0.4290278, -9.400717, 10.121603, 0.4290278, -11.150717, 10.121603, 0.4290278, 11.099283, 10.121603, 0.4290278, 9.349283, 9.371603, 0.4290278, 9.099283, 8.621603, 0.4290278, 3.0992832, -9.878397, 0.4290278, -11.150717, 8.871603, 0.4290278, 4.849283, 26.871603, 2.9290278, -2.1507168, 27.621603, 2.9290278, -2.1507168, 27.621603, 2.9290278, -3.4007168, 26.871603, 2.9290278, -2.4007168, 22.871603, 2.6790278, 8.349283, 22.871603, 2.9290278, 8.849283, 24.371603, 2.9290278, 8.849283, 23.621603, 2.9290278, 6.599283, 20.121603, 0.9290278, 6.599283, 20.371603, 0.4290278, 6.099283, 18.621603, 0.4290278, 5.599283, 18.621603, 0.4290278, 8.349283, 12.371603, 2.9290278, -3.1507168, 12.121603, 2.9290278, -2.9007168, 14.621603, 2.9290278, -2.9007168, 14.871603, 2.9290278, -3.4007168, 26.621603, 2.9290278, -2.9007168, 23.871603, 2.9290278, 2.8492832, 18.371603, 2.9290278, 2.8492832, 18.371603, 2.9290278, 3.0992832, 20.038269, 0.6790278, 8.349283, 24.121603, 2.9290278, 2.8492832, 17.871603, 2.9290278, 2.8492832, 15.371603, 2.9290278, -2.6507168, 23.871603, 2.9290278, 3.3492832, 21.121603, 2.9290278, -8.400717, 27.621603, 2.9290278, -8.400717, 27.621603, 2.9290278, -8.900717, 20.621603, 2.9290278, -8.650717, 9.871603, 2.9290278, -3.6507168, 10.121603, 2.9290278, -3.9007168, 10.121603, 2.9290278, -8.400717, 9.871603, 2.9290278, -8.900717, 14.621603, 2.9290278, -8.650717, 15.121603, 2.9290278, -8.400717, 15.371603, 2.9290278, -3.1507168, 21.371603, 2.9290278, -3.1507168, 20.871603, 2.9290278, -3.4007168, 17.621603, 2.9290278, 8.849283, 18.371603, 2.9290278, 8.849283, 17.621603, 0.4290278, -8.150717, 17.371603, 0.4290278, -8.900717, 16.871603, 0.4290278, -8.150717, 10.621603, 2.6790278, -3.9007168, 10.121603, 2.9290278, -2.6507168, 18.121603, 0.4290278, -3.6507168, 18.371603, 0.4290278, -2.9007168, 18.621603, 0.4290278, -2.9007168, 18.871603, 0.4290278, -3.6507168, 12.121603, 0.9290278, -6.900717, 12.621603, 0.4290278, -6.900717, 10.621603, 0.4290278, -8.150717, 15.621603, 0.4290278, -8.150717, 15.371603, 0.4290278, -6.150717, 12.371603, 0.4290278, -3.6507168, 14.371603, 0.4290278, -3.6507168, 14.371603, 0.4290278, -5.400717, 15.371603, 0.4290278, -5.650717, 14.371603, 0.4290278, -6.400717, 15.621603, 0.4290278, -3.6507168, 14.371603, 0.4290278, -8.150717, 20.371603, 0.4290278, -3.6507168, 20.371603, 0.4290278, -8.150717, 9.871603, 2.9290278, 8.849283, 10.371603, 2.9290278, 8.849283, 23.621603, 0.4290278, -2.9007168, 24.121603, 0.4290278, -2.9007168, 24.371603, 0.4290278, -3.6507168, 23.371603, 0.4290278, -3.6507168, 21.621603, 0.4290278, -8.150717, 21.621603, 0.4290278, -3.6507168, 27.121603, 0.4290278, -3.6507168, 27.121603, 0.4290278, -8.150717, 18.871603, 0.4290278, -2.4007168, 18.121603, 0.4290278, -2.4007168, 23.621603, 0.4290278, 2.3492832, 24.371603, 0.4290278, 0.5992832, 23.371603, 0.4290278, -2.4007168, 17.621603, 0.4290278, 0.5992832, 18.371603, 0.4290278, 2.3492832, 16.871603, 0.4290278, 0.34928322, 16.871603, 0.4290278, 0.5992832, 17.121603, 0.4290278, -0.40071678, 24.371603, 0.4290278, -2.4007168, 25.121603, 0.4290278, -0.6507168, 16.121603, 0.4290278, -2.4007168, 25.621603, 0.4290278, 0.34928322, 25.621603, 0.4290278, 0.09928322, 26.121603, 0.4290278, -2.4007168, 17.371603, 0.4290278, 4.849283, 17.871603, 0.4290278, 4.599283, 17.871603, 0.4290278, 4.349283, 17.371603, 0.4290278, 4.099283, 14.621603, 0.4290278, -2.4007168, 10.621603, 0.4290278, -2.4007168, 10.621603, 0.4290278, -0.15071678, 10.621603, 0.4290278, 0.8492832, 15.621603, 0.4290278, -0.15071678, 16.371603, 0.4290278, 1.3492832, 10.621603, 0.4290278, 8.349283, 17.371603, 0.4290278, 8.349283, 17.371603, 0.4290278, 2.8492832, 26.121603, 0.4290278, 0.34928322, 25.871603, 0.4290278, 1.0992832, 18.371603, 0.4290278, 4.349283, 18.621603, 0.4290278, 4.849283, 24.371603, 0.4290278, 4.599283, 24.621603, 0.4290278, 8.349283, 27.121603, 0.4290278, 8.349283, 27.121603, 0.4290278, -1.1507168, 24.371603, 0.4290278, 4.349283, 23.621603, 0.4290278, 4.349283, 23.371603, 0.4290278, 3.5992832, 23.371603, 0.4290278, 4.849283, 18.621603, 0.4290278, 3.5992832, 23.371603, 0.4290278, 6.349283, 24.621603, 0.4290278, 2.8492832, 4.871603, 2.6790278, 3.3492832, 4.871603, 2.6790278, 4.099283, 5.871603, 2.6790278, 4.099283, 5.871603, 2.6790278, 3.3492832, 7.121603, 2.4290278, 3.5992832, 7.121603, 2.4290278, 4.599283, 8.371603, 2.4290278, 4.599283, 8.371603, 2.4290278, 3.5992832)
-polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 5), PackedInt32Array(3, 5, 4), PackedInt32Array(5, 6, 7), PackedInt32Array(7, 6, 8), PackedInt32Array(10, 9, 4), PackedInt32Array(12, 11, 13), PackedInt32Array(15, 14, 16), PackedInt32Array(7, 8, 10), PackedInt32Array(10, 8, 16), PackedInt32Array(10, 16, 14), PackedInt32Array(10, 14, 9), PackedInt32Array(6, 5, 17), PackedInt32Array(17, 5, 0), PackedInt32Array(11, 4, 13), PackedInt32Array(13, 4, 18), PackedInt32Array(18, 4, 9), PackedInt32Array(11, 3, 4), PackedInt32Array(19, 17, 0), PackedInt32Array(19, 0, 16), PackedInt32Array(8, 19, 16), PackedInt32Array(20, 23, 21), PackedInt32Array(21, 23, 22), PackedInt32Array(25, 24, 26), PackedInt32Array(26, 24, 27), PackedInt32Array(29, 28, 30), PackedInt32Array(30, 28, 31), PackedInt32Array(33, 32, 34), PackedInt32Array(34, 32, 35), PackedInt32Array(22, 23, 36), PackedInt32Array(39, 38, 37), PackedInt32Array(31, 28, 40), PackedInt32Array(40, 28, 24), PackedInt32Array(24, 28, 27), PackedInt32Array(41, 37, 20), PackedInt32Array(20, 37, 23), PackedInt32Array(39, 42, 38), PackedInt32Array(38, 42, 43), PackedInt32Array(43, 42, 34), PackedInt32Array(44, 41, 27), PackedInt32Array(27, 41, 26), PackedInt32Array(46, 45, 47), PackedInt32Array(47, 45, 48), PackedInt32Array(50, 49, 51), PackedInt32Array(51, 49, 52), PackedInt32Array(53, 52, 48), PackedInt32Array(48, 52, 47), PackedInt32Array(53, 51, 52), PackedInt32Array(55, 35, 54), PackedInt32Array(54, 35, 53), PackedInt32Array(22, 36, 56), PackedInt32Array(56, 36, 43), PackedInt32Array(35, 55, 34), PackedInt32Array(34, 55, 43), PackedInt32Array(48, 54, 53), PackedInt32Array(55, 57, 43), PackedInt32Array(43, 57, 56), PackedInt32Array(41, 44, 37), PackedInt32Array(37, 44, 39), PackedInt32Array(59, 58, 39), PackedInt32Array(39, 58, 42), PackedInt32Array(56, 57, 45), PackedInt32Array(45, 57, 48), PackedInt32Array(62, 61, 60), PackedInt32Array(50, 63, 49), PackedInt32Array(49, 63, 64), PackedInt32Array(66, 65, 67), PackedInt32Array(67, 65, 68), PackedInt32Array(71, 70, 69), PackedInt32Array(33, 64, 32), PackedInt32Array(32, 64, 63), PackedInt32Array(32, 63, 69), PackedInt32Array(73, 72, 62), PackedInt32Array(75, 74, 76), PackedInt32Array(76, 74, 70), PackedInt32Array(63, 71, 69), PackedInt32Array(73, 62, 60), PackedInt32Array(77, 76, 78), PackedInt32Array(78, 76, 70), PackedInt32Array(65, 79, 77), PackedInt32Array(68, 65, 77), PackedInt32Array(78, 70, 80), PackedInt32Array(80, 70, 71), PackedInt32Array(78, 73, 77), PackedInt32Array(73, 60, 77), PackedInt32Array(77, 60, 82), PackedInt32Array(77, 82, 68), PackedInt32Array(68, 82, 81), PackedInt32Array(84, 83, 64), PackedInt32Array(64, 83, 49), PackedInt32Array(85, 88, 86), PackedInt32Array(86, 88, 87), PackedInt32Array(88, 89, 87), PackedInt32Array(88, 90, 89), PackedInt32Array(91, 87, 92), PackedInt32Array(92, 87, 89), PackedInt32Array(67, 93, 66), PackedInt32Array(66, 93, 94), PackedInt32Array(96, 95, 97), PackedInt32Array(97, 95, 93), PackedInt32Array(93, 95, 98), PackedInt32Array(98, 95, 99), PackedInt32Array(101, 100, 98), PackedInt32Array(98, 100, 102), PackedInt32Array(98, 102, 94), PackedInt32Array(98, 94, 93), PackedInt32Array(86, 103, 85), PackedInt32Array(85, 103, 97), PackedInt32Array(97, 103, 104), PackedInt32Array(97, 104, 96), PackedInt32Array(94, 102, 105), PackedInt32Array(107, 106, 104), PackedInt32Array(104, 106, 96), PackedInt32Array(103, 108, 104), PackedInt32Array(110, 109, 111), PackedInt32Array(111, 109, 112), PackedInt32Array(115, 114, 113), PackedInt32Array(2, 115, 1), PackedInt32Array(1, 115, 116), PackedInt32Array(115, 113, 116), PackedInt32Array(116, 113, 117), PackedInt32Array(101, 118, 100), PackedInt32Array(100, 118, 117), PackedInt32Array(118, 109, 117), PackedInt32Array(117, 109, 120), PackedInt32Array(117, 120, 116), PackedInt32Array(116, 120, 119), PackedInt32Array(118, 121, 112), PackedInt32Array(118, 112, 109), PackedInt32Array(107, 122, 106), PackedInt32Array(106, 122, 123), PackedInt32Array(111, 124, 110), PackedInt32Array(110, 124, 125), PackedInt32Array(130, 123, 126), PackedInt32Array(126, 123, 129), PackedInt32Array(126, 129, 127), PackedInt32Array(127, 129, 128), PackedInt32Array(132, 131, 133), PackedInt32Array(124, 134, 125), PackedInt32Array(125, 134, 29), PackedInt32Array(29, 134, 133), PackedInt32Array(133, 134, 132), PackedInt32Array(29, 30, 125), PackedInt32Array(123, 122, 129), PackedInt32Array(130, 126, 131), PackedInt32Array(131, 126, 133), PackedInt32Array(133, 135, 29), PackedInt32Array(130, 136, 123), PackedInt32Array(140, 139, 137), PackedInt32Array(137, 139, 138), PackedInt32Array(144, 143, 141), PackedInt32Array(141, 143, 142)]
 agent_radius = 0.2
 
 [sub_resource type="BoxMesh" id="BoxMesh_7dm0k"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_0wfyh"]
-viewport_path = NodePath("Camera")
+viewport_path = NodePath("Room/CameraViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_sugp2"]
-viewport_path = NodePath("Camera")
+viewport_path = NodePath("Room/CameraViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_2wyq8"]
 viewport_path = NodePath("Sprite3D/TimeOverlay/OverlayViewport")
@@ -66,6 +73,11 @@ _data = {
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ya4ey"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ya4ey"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c6pm6"]
+_data = {
+&"shotgun_reload": ExtResource("32_pibwh")
+}
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_muem4"]
 
@@ -91,47 +103,84 @@ NodePath("Area3D"): NodePath("Area3D/CSGMesh3D2"),
 NodePath("Area3D3"): NodePath("Area3D3/MeshInstance3D2"),
 NodePath("PowerSwitch"): NodePath("PowerSwitch/MeshInstance3D2"),
 NodePath("OfficeDoor"): NodePath("OfficeDoor/MeshInstance3D2"),
-NodePath("Camera/CameraViewport/Camera3D/Area3D3"): NodePath("Camera/CameraViewport/Camera3D/Area3D3/MeshInstance3D2")
+NodePath("Room/CameraViewport/Camera3D/Area3D3"): NodePath(""),
+NodePath("Room2/CameraViewport/Camera3D/Area3D3"): NodePath("Room2/CameraViewport/Camera3D/Area3D3/MeshInstance3D2"),
+NodePath("Room3/CameraViewport/Camera3D/Area3D3"): NodePath(""),
+NodePath("Area3D4"): NodePath("Area3D4/CSGMesh3D2")
 })
 
-[node name="GameModeManager" type="Node" parent="." unique_id=1711575424 node_paths=PackedStringArray("freeroam_controller", "office_controller", "night_light", "day_light", "night_time_label", "day_time_label", "power_label", "money_label", "ai_list", "all_rooms", "camera_system", "shop")]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=788497986]
+
+[node name="GameModeManager" type="Node" parent="." unique_id=1711575424 node_paths=PackedStringArray("inventory_manager", "power_manager", "office_ui", "freeroam_ui", "freeroam_controller", "office_controller", "night_light", "day_light", "ai_list", "all_rooms", "camera_system", "shop")]
 script = ExtResource("2_dp3eg")
+inventory_manager = NodePath("InventoryManager")
+power_manager = NodePath("PowerManager")
+office_ui = NodePath("OfficeUIManager")
+freeroam_ui = NodePath("../FreeroamController/FreeroamCam/FreeroamUIManager")
 freeroam_controller = NodePath("../FreeroamController")
 office_controller = NodePath("../PlayerCam")
 night_light = NodePath("../night_light")
 day_light = NodePath("../DirectionalLight3D")
-night_time_label = NodePath("../Sprite3D/TimeOverlay/OverlayViewport/CanvasLayer/NightTimeLabel")
-day_time_label = NodePath("../FreeroamController/FreeroamCam/CanvasLayer/Label")
-power_label = NodePath("../Sprite3D/TimeOverlay/OverlayViewport/CanvasLayer/PowerLabel")
-money_label = NodePath("../Sprite3D/TimeOverlay/OverlayViewport/CanvasLayer/MoneyLabel")
 ai_list = [NodePath("../AI_Base")]
-all_rooms = [NodePath("../Room"), NodePath("../Room2"), NodePath("../Room3"), NodePath("../Room4"), NodePath("../Room5")]
+all_rooms = [NodePath("../Room"), NodePath("../Room2"), NodePath("../Room3")]
 camera_system = NodePath("../DirectionalLight3D")
 shop = NodePath("../Shop")
-metadata/_custom_type_script = "uid://7fnki0j8tex6"
 
 [node name="Timer" type="Timer" parent="GameModeManager" unique_id=1477087839]
 wait_time = 2.0
 autostart = true
 
-[node name="OfficeUIController" type="Node" parent="GameModeManager" unique_id=891198768 node_paths=PackedStringArray("radio_button")]
+[node name="PowerManager" type="Node" parent="GameModeManager" unique_id=361710490 node_paths=PackedStringArray("office_ui")]
+script = ExtResource("1_power")
+office_ui = NodePath("../OfficeUIManager")
+
+[node name="InventoryManager" type="Node" parent="GameModeManager" unique_id=506231724]
+script = ExtResource("3_invmgmt")
+start_shells = 3
+
+[node name="OfficeUIManager" type="Node" parent="GameModeManager" unique_id=2134879832 node_paths=PackedStringArray("radio_button", "night_time_label", "day_time_label", "power_label", "money_label")]
 script = ExtResource("3_2wyq8")
 radio_button = NodePath("../../Area3D3")
-metadata/_custom_type_script = "uid://xugqeqysykh5"
+night_time_label = NodePath("../../Sprite3D/TimeOverlay/OverlayViewport/CanvasLayer/NightTimeLabel")
+day_time_label = NodePath("../../FreeroamController/FreeroamCam/CanvasLayer/Label")
+power_label = NodePath("../../Sprite3D/TimeOverlay/OverlayViewport/CanvasLayer/PowerLabel")
+money_label = NodePath("../../Sprite3D/TimeOverlay/OverlayViewport/CanvasLayer/MoneyLabel")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2140260495 node_paths=PackedStringArray("cameras", "cam_to_room", "display", "close_up")]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2140260495 node_paths=PackedStringArray("power_manager", "office_ui", "cameras", "display", "close_up")]
 transform = Transform3D(1, 0, 0, 0, 0.6789161, 0.73421586, 0, -0.73421586, 0.6789161, 0, 1.3558397, 0)
+light_indirect_energy = 0.0
 script = ExtResource("3_sugp2")
-cameras = [NodePath("../Camera/CameraViewport"), NodePath("../Camera2/CameraViewport"), NodePath("../Camera3/CameraViewport"), NodePath("../Camera4/CameraViewport"), NodePath("../Camera5/CameraViewport")]
-cam_to_room = {
-NodePath("../Camera2/CameraViewport"): NodePath("../Room2")
-}
+power_manager = NodePath("../GameModeManager/PowerManager")
+office_ui = NodePath("../GameModeManager/OfficeUIManager")
+cameras = [NodePath("../Room"), NodePath("../Room2"), NodePath("../Room3")]
 no_visual = ExtResource("4_og1vs")
 display = NodePath("../Sprite3D")
 close_up = NodePath("../Sprite2D")
 
 [node name="night_light" type="DirectionalLight3D" parent="." unique_id=1833825326]
 transform = Transform3D(1, 0, 0, 0, 0.6789161, 0.73421586, 0, -0.73421586, 0.6789161, 0, 1.3558397, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="night_light" unique_id=369832092]
+transform = Transform3D(1, 0, 0, 0, 0.7394549, 0.6732062, 0, -0.6732062, 0.7394549, 0, 4.088584, 0.8526385)
+light_color = Color(0.6003757, 0.4344217, 0, 1)
+light_volumetric_fog_energy = 1.766
+spot_range = 6.458
+spot_attenuation = -1.15
+spot_angle = 21.0
+spot_angle_attenuation = 0.3077861
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="night_light" unique_id=2073673024]
+transform = Transform3D(1, 0, 0, 0, 0.7394549, 0.6732062, 0, -0.6732062, 0.7394549, 0.636824, 16.059994, -12.625353)
+light_color = Color(0.99999994, 0.84133357, 0.5462328, 1)
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.915
+shadow_enabled = true
+shadow_transmittance_bias = -16.0
+shadow_blur = 1.214
+spot_range = 6.458
+spot_attenuation = -1.26
+spot_angle = 21.0
+spot_angle_attenuation = 0.032352183
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1360022572]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, -1.1641532e-10)
@@ -143,7 +192,10 @@ use_collision = true
 mesh = SubResource("BoxMesh_7dm0k")
 
 [node name="first_floor" parent="NavigationRegion3D" unique_id=2043675402 instance=ExtResource("4_gqmmt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.82514, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 28.755268, 0.03871441, -0.0039644246)
+
+[node name="blockbench_export2" parent="NavigationRegion3D" unique_id=1831203843 instance=ExtResource("37_fuf3a")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.25278994, -0.10708606, -20.361208)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=135481674]
 position = Vector2(569, -483)
@@ -208,7 +260,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TimeSprite" type="Sprite3D" parent="Sprite3D/TimeOverlay" unique_id=1070143470]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.005)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6240339, 0.005)
 texture = SubResource("ViewportTexture_2wyq8")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=411017893]
@@ -301,7 +353,7 @@ mesh = SubResource("SphereMesh_tbgi4")
 surface_material_override/0 = ExtResource("1_jyhfs")
 
 [node name="Area3D4" type="Area3D" parent="." unique_id=411017894]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5035672, 2.5834675, -1.294)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2188754, 1.0830933, -1.294)
 collision_layer = 3
 collision_mask = 524291
 script = ExtResource("8_0ld40")
@@ -315,45 +367,6 @@ debug_color = Color(0.9529412, 0.21960784, 0, 1)
 mesh = SubResource("SphereMesh_tbgi4")
 
 [node name="CSGMesh3D2" type="CSGMesh3D" parent="Area3D4" unique_id=2000202120]
-process_mode = 4
-mesh = SubResource("SphereMesh_tbgi4")
-material = ExtResource("1_jyhfs")
-
-[node name="Area3D5" type="Area3D" parent="." unique_id=2080415149]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.015288, 0.95810616, -0.20276582)
-collision_layer = 3
-collision_mask = 524291
-script = ExtResource("8_0ld40")
-metadata/number = 3
-metadata/visual = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D5" unique_id=1779286779]
-shape = SubResource("BoxShape3D_sugp2")
-debug_color = Color(0.9529412, 0.21960784, 0, 1)
-
-[node name="CSGMesh3D" type="CSGMesh3D" parent="Area3D5" unique_id=1808337849]
-mesh = SubResource("SphereMesh_tbgi4")
-
-[node name="CSGMesh3D2" type="CSGMesh3D" parent="Area3D5" unique_id=2000202121]
-process_mode = 4
-mesh = SubResource("SphereMesh_tbgi4")
-material = ExtResource("1_jyhfs")
-
-[node name="Area3D6" type="Area3D" parent="." unique_id=2080415150]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5035672, 0.95, -1.294)
-collision_layer = 3
-collision_mask = 524291
-script = ExtResource("8_0ld40")
-metadata/number = 4
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D6" unique_id=1779286780]
-shape = SubResource("BoxShape3D_sugp2")
-debug_color = Color(0.9529412, 0.21960784, 0, 1)
-
-[node name="CSGMesh3D" type="CSGMesh3D" parent="Area3D6" unique_id=1808337850]
-mesh = SubResource("SphereMesh_tbgi4")
-
-[node name="CSGMesh3D2" type="CSGMesh3D" parent="Area3D6" unique_id=2000202122]
 process_mode = 4
 mesh = SubResource("SphereMesh_tbgi4")
 material = ExtResource("1_jyhfs")
@@ -384,9 +397,8 @@ wait_time = 2.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="AI_Base" unique_id=90240748]
 
-[node name="StateMachine" type="Node" parent="AI_Base/NavigationAgent3D" unique_id=2141207203 node_paths=PackedStringArray("initial_state", "ai_base")]
+[node name="StateMachine" type="Node" parent="AI_Base/NavigationAgent3D" unique_id=2141207203 node_paths=PackedStringArray("ai_base")]
 script = ExtResource("5_tefeu")
-initial_state = NodePath("IdleState")
 ai_base = NodePath("../..")
 metadata/_custom_type_script = "uid://0f752tg6ys4m"
 
@@ -412,6 +424,9 @@ script = ExtResource("13_ivst")
 script = ExtResource("24_qkpxi")
 metadata/_custom_type_script = "uid://d1jl43kwcto04"
 
+[node name="DetectionArea" type="Area3D" parent="AI_Base" unique_id=283592366]
+collision_mask = 9
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="AI_Base" unique_id=283592367]
 mesh = SubResource("CapsuleMesh_ya4ey")
 surface_material_override/0 = ExtResource("12_eb6dy")
@@ -429,8 +444,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("16_jbj1t")
 metadata/_custom_type_script = "uid://dog8q1b40mg6l"
 
-[node name="Interactor" type="Node3D" parent="FreeroamController/FreeroamCam" unique_id=1483624667 node_paths=PackedStringArray("crosshair")]
+[node name="FreeroamUIManager" type="Node" parent="FreeroamController/FreeroamCam" unique_id=1331439164 node_paths=PackedStringArray("crosshair")]
+script = ExtResource("2_freeroamui")
+crosshair = NodePath("../CanvasLayer/Crosshair")
+
+[node name="Interactor" type="Node3D" parent="FreeroamController/FreeroamCam" unique_id=1483624667 node_paths=PackedStringArray("shotgun", "crosshair")]
 script = ExtResource("17_muem4")
+shotgun = NodePath("../shotugn")
 crosshair = NodePath("../CanvasLayer/Crosshair")
 metadata/_custom_type_script = "uid://cj6t3i7baijdq"
 
@@ -452,8 +472,20 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="FreeroamController/FreeroamCam/CanvasLayer" unique_id=263564093]
 offset_right = 40.0
 offset_bottom = 23.0
-text = "porno
+text = "
 "
+
+[node name="shotugn" parent="FreeroamController/FreeroamCam" unique_id=207435244 instance=ExtResource("6_kmb1v")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.7217541)
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="FreeroamController/FreeroamCam/shotugn" unique_id=404801529]
+libraries/shotgun = SubResource("AnimationLibrary_c6pm6")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="FreeroamController/FreeroamCam" unique_id=1388683363]
+light_energy = 3.128
+spot_range = 3.2111278
+spot_angle = 9.942772
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FreeroamController" unique_id=89012932]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -462,45 +494,123 @@ shape = SubResource("CapsuleShape3D_muem4")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="FreeroamController" unique_id=1202031912]
 mesh = SubResource("CapsuleMesh_dp3eg")
 
-[node name="Room" parent="." unique_id=34470668 node_paths=PackedStringArray("spots", "neighbors") instance=ExtResource("9_0ld40")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.820456, 1.1583791, 6.6843667)
+[node name="Room" parent="." unique_id=34470668 node_paths=PackedStringArray("spots", "neighbors", "targets") instance=ExtResource("9_0ld40")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2396555, 0.6615088, -12.688011)
 spots = [NodePath("Node3D"), NodePath("Node3D2")]
 neighbors = [NodePath("../Room2"), NodePath("../Room3")]
-distance_to_office = 1
+targets = [NodePath("CameraViewport")]
+distance_to_office = 9
 
 [node name="Node3D" type="Node3D" parent="Room" unique_id=1713919026]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5166225, 0, -4.2467446)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5166225, -0.9326613, -2.579557)
 
 [node name="Node3D2" type="Node3D" parent="Room" unique_id=1858422114]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.932632, 2.385398, 0.75668526)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.650186, -0.68944216, 0.75668526)
+
+[node name="CameraViewport" type="SubViewport" parent="Room" unique_id=1833218258]
+size = Vector2i(640, 480)
+script = ExtResource("3_a8y0u")
+metadata/visual = true
+metadata/audio = false
+
+[node name="Camera3D" type="Camera3D" parent="Room/CameraViewport" unique_id=948733155]
+transform = Transform3D(-0.8517361, -0.20077693, 0.48397756, 0, 0.9236723, 0.38318327, -0.5239711, 0.326371, -0.78672504, 8.354924, 1.6560509, -28.849424)
+current = true
+fov = 66.5
+
+[node name="Area3D3" type="Area3D" parent="Room/CameraViewport/Camera3D" unique_id=1083477195]
+transform = Transform3D(0.7642126, 1.4901161e-08, 0.64496434, 0.31517273, 0.8724704, -0.37344545, -0.5627123, 0.48866692, 0.66675293, 0, 0, 0)
+collision_layer = 3
+collision_mask = 524291
+script = ExtResource("8_0ld40")
+metadata/number = 0
+metadata/radio_number = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/CameraViewport/Camera3D/Area3D3" unique_id=1186309499]
+shape = SubResource("BoxShape3D_sugp2")
+debug_color = Color(0.9529412, 0.21960784, 0, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Room/CameraViewport" unique_id=1108386381]
+
+[node name="ColorRect" type="ColorRect" parent="Room/CameraViewport/CanvasLayer" unique_id=765645340]
+material = SubResource("ShaderMaterial_2wyq8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Room2" parent="." unique_id=2049328423 node_paths=PackedStringArray("spots", "neighbors", "targets") instance=ExtResource("9_0ld40")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.968215, 1.1583791, -3.9417958)
+transform = Transform3D(0.0064751212, 0, 0.999979, 0, 1, 0, -0.999979, 0, 0.0064751212, 4.7018833, 1.1583791, -18.563185)
 spots = [NodePath("Node3D")]
-neighbors = [NodePath("../Room"), NodePath("../Room5")]
-targets = [NodePath("../Camera2/CameraViewport")]
-distance_to_office = 2
+neighbors = [NodePath("../Room")]
+targets = [NodePath("CameraViewport")]
+distance_to_office = 10
 
 [node name="Distraction" type="Node3D" parent="Room2" unique_id=1484613208 node_paths=PackedStringArray("room")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7689276, 0, -1.4950161)
 script = ExtResource("19_gqmmt")
 room = NodePath("..")
+radius = 20.0
 metadata/_custom_type_script = "uid://cng5rv84le1jw"
 
 [node name="Node3D" type="Node3D" parent="Room2" unique_id=1185466326]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8265944, 0, -3.4435697)
 
-[node name="Room3" parent="." unique_id=367151340 node_paths=PackedStringArray("spots", "neighbors") instance=ExtResource("9_0ld40")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6004333, 1.1583791, 3.6006746)
+[node name="CameraViewport" type="SubViewport" parent="Room2" unique_id=590288515]
+size = Vector2i(640, 480)
+script = ExtResource("3_a8y0u")
+metadata/visual = true
+metadata/audio = false
+
+[node name="Camera3D" type="Camera3D" parent="Room2/CameraViewport" unique_id=754528296]
+transform = Transform3D(0.59579045, 0.2809504, -0.75239646, 1.4901161e-08, 0.9368188, 0.34981498, 0.80314004, -0.20841645, 0.5581476, -9.297554, 1.7692165, -11.075525)
+current = true
+fov = 108.7
+
+[node name="Area3D3" type="Area3D" parent="Room2/CameraViewport/Camera3D" unique_id=1547906788]
+transform = Transform3D(0.7642126, 1.4901161e-08, 0.64496434, 0.31517273, 0.8724704, -0.37344545, -0.5627123, 0.48866692, 0.66675293, 0, 0, 0)
+collision_layer = 3
+collision_mask = 524291
+script = ExtResource("8_0ld40")
+metadata/number = 1
+metadata/radio_number = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room2/CameraViewport/Camera3D/Area3D3" unique_id=268115410]
+shape = SubResource("BoxShape3D_sugp2")
+debug_color = Color(0.9529412, 0.21960784, 0, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room2/CameraViewport/Camera3D/Area3D3" unique_id=948277079]
+visible = false
+mesh = SubResource("TubeTrailMesh_0ld40")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Room2/CameraViewport/Camera3D/Area3D3" unique_id=1054426428]
+visible = false
+mesh = SubResource("TubeTrailMesh_0ld40")
+surface_material_override/0 = ExtResource("1_jyhfs")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Room2/CameraViewport" unique_id=273323045]
+
+[node name="ColorRect" type="ColorRect" parent="Room2/CameraViewport/CanvasLayer" unique_id=1307145678]
+material = SubResource("ShaderMaterial_2wyq8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Room3" parent="." unique_id=367151340 node_paths=PackedStringArray("spots", "neighbors", "targets") instance=ExtResource("9_0ld40")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.123899, 1.1583791, -21.210587)
 spots = [NodePath("Node3D"), NodePath("Node3D2")]
-neighbors = [NodePath("../Room"), NodePath("../Room4")]
-distance_to_office = 2
+neighbors = [NodePath("../Room")]
+targets = [NodePath("CameraViewport")]
+distance_to_office = 8
 
 [node name="Node3D" type="Node3D" parent="Room3" unique_id=367151343]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.73, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.31221044, 3)
 
 [node name="Node3D2" type="Node3D" parent="Room3" unique_id=367151344]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -0.73, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2067609, -0.73, -3.2834587)
 
 [node name="Distraction" type="Node3D" parent="Room3" unique_id=367151360 node_paths=PackedStringArray("room")]
 process_mode = 4
@@ -528,296 +638,34 @@ visible = false
 mesh = SubResource("SphereMesh_tbgi4")
 surface_material_override/0 = ExtResource("1_jyhfs")
 
-[node name="Room4" parent="." unique_id=367151341 node_paths=PackedStringArray("spots", "neighbors") instance=ExtResource("9_0ld40")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.1583791, 2)
-spots = [NodePath("Node3D"), NodePath("Node3D2")]
-neighbors = [NodePath("../Room3")]
-distance_to_office = 3
-
-[node name="Node3D" type="Node3D" parent="Room4" unique_id=367151345]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.73, 2)
-
-[node name="Node3D2" type="Node3D" parent="Room4" unique_id=367151346]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.73, 0)
-
-[node name="Distraction" type="Node3D" parent="Room4" unique_id=367151370 node_paths=PackedStringArray("room")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
-script = ExtResource("19_gqmmt")
-room = NodePath("..")
-
-[node name="RadioPlacementSpot" type="Area3D" parent="Room4" unique_id=367151371]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0.3, 1)
-collision_layer = 3
-collision_mask = 524291
-script = ExtResource("8_0ld40")
-metadata/room_name = "Room4"
-metadata/camera_index = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Room4/RadioPlacementSpot" unique_id=367151372]
-shape = SubResource("BoxShape3D_sugp2")
-debug_color = Color(0.9529412, 0.21960784, 0, 1)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Room4/RadioPlacementSpot" unique_id=367151373]
-mesh = SubResource("SphereMesh_tbgi4")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Room4/RadioPlacementSpot" unique_id=367151374]
-visible = false
-mesh = SubResource("SphereMesh_tbgi4")
-surface_material_override/0 = ExtResource("1_jyhfs")
-
-[node name="Room5" parent="." unique_id=367151342 node_paths=PackedStringArray("spots", "neighbors") instance=ExtResource("9_0ld40")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.66956, 1.1583791, -4.148024)
-spots = [NodePath("Node3D"), NodePath("Node3D2")]
-neighbors = [NodePath("../Room2")]
-distance_to_office = 3
-
-[node name="Node3D" type="Node3D" parent="Room5" unique_id=367151347]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.73, -2)
-
-[node name="Node3D2" type="Node3D" parent="Room5" unique_id=367151348]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -0.73, -4)
-
-[node name="Distraction" type="Node3D" parent="Room5" unique_id=367151380 node_paths=PackedStringArray("room")]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
-script = ExtResource("19_gqmmt")
-room = NodePath("..")
-
-[node name="RadioPlacementSpot" type="Area3D" parent="Room5" unique_id=367151381]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.3, -3)
-collision_layer = 3
-collision_mask = 524291
-script = ExtResource("8_0ld40")
-metadata/room_name = "Room5"
-metadata/camera_index = 4
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Room5/RadioPlacementSpot" unique_id=367151382]
-shape = SubResource("BoxShape3D_sugp2")
-debug_color = Color(0.9529412, 0.21960784, 0, 1)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Room5/RadioPlacementSpot" unique_id=367151383]
-mesh = SubResource("SphereMesh_tbgi4")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Room5/RadioPlacementSpot" unique_id=367151384]
-visible = false
-mesh = SubResource("SphereMesh_tbgi4")
-surface_material_override/0 = ExtResource("1_jyhfs")
-
-[node name="Camera" type="Node3D" parent="." unique_id=123909701]
-
-[node name="CameraViewport" type="SubViewport" parent="Camera" unique_id=1833218258]
-size = Vector2i(640, 480)
-script = ExtResource("3_a8y0u")
-metadata/visual = false
-metadata/audio = false
-
-[node name="Camera3D" type="Camera3D" parent="Camera/CameraViewport" unique_id=948733155]
-transform = Transform3D(0.76421267, 0.31517273, -0.5627123, 0, 0.87247044, 0.48866692, 0.64496434, -0.37344545, 0.66675293, 10.303893, 3.5861125, -2.898655)
-current = true
-fov = 108.7
-
-[node name="Area3D3" type="Area3D" parent="Camera/CameraViewport/Camera3D" unique_id=1083477195]
-transform = Transform3D(0.7642126, 1.4901161e-08, 0.64496434, 0.31517273, 0.8724704, -0.37344545, -0.5627123, 0.48866692, 0.66675293, 0, 0, 0)
-collision_layer = 3
-collision_mask = 524291
-script = ExtResource("8_0ld40")
-metadata/number = 0
-metadata/radio_number = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera/CameraViewport/Camera3D/Area3D3" unique_id=1186309499]
-shape = SubResource("BoxShape3D_sugp2")
-debug_color = Color(0.9529412, 0.21960784, 0, 1)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera/CameraViewport/Camera3D/Area3D3" unique_id=1674658952]
-mesh = SubResource("TubeTrailMesh_0ld40")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Camera/CameraViewport/Camera3D/Area3D3" unique_id=219111130]
-mesh = SubResource("TubeTrailMesh_0ld40")
-surface_material_override/0 = ExtResource("1_jyhfs")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Camera/CameraViewport" unique_id=1108386381]
-
-[node name="ColorRect" type="ColorRect" parent="Camera/CameraViewport/CanvasLayer" unique_id=765645340]
-material = SubResource("ShaderMaterial_2wyq8")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Camera2" type="Node3D" parent="." unique_id=1427304244]
-
-[node name="CameraViewport" type="SubViewport" parent="Camera2" unique_id=590288515]
+[node name="CameraViewport" type="SubViewport" parent="Room3" unique_id=590288516]
 size = Vector2i(640, 480)
 script = ExtResource("3_a8y0u")
 metadata/visual = true
 metadata/audio = false
 
-[node name="Camera3D" type="Camera3D" parent="Camera2/CameraViewport" unique_id=754528296]
-transform = Transform3D(-0.562496, -0.6084553, 0.55980396, -0.026917659, 0.69019085, 0.72312653, -0.82636184, 0.3916872, -0.4046078, 25.200905, 7.296945, -2.898655)
+[node name="Camera3D" type="Camera3D" parent="Room3/CameraViewport" unique_id=754528297]
+transform = Transform3D(-0.68972075, 0.30457515, -0.6569013, -2.7924242e-08, 0.9072277, 0.42064005, 0.72407556, 0.29012418, -0.62573373, -8.6143675, 1.5018625, -23.011005)
 current = true
-fov = 108.7
+fov = 84.8
 
-[node name="Area3D3" type="Area3D" parent="Camera2/CameraViewport/Camera3D" unique_id=1547906788]
-transform = Transform3D(0.7642126, 1.4901161e-08, 0.64496434, 0.31517273, 0.8724704, -0.37344545, -0.5627123, 0.48866692, 0.66675293, 0, 0, 0)
-collision_layer = 3
-collision_mask = 524291
-script = ExtResource("8_0ld40")
-metadata/number = 0
-metadata/radio_number = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera2/CameraViewport/Camera3D/Area3D3" unique_id=268115410]
-shape = SubResource("BoxShape3D_sugp2")
-debug_color = Color(0.9529412, 0.21960784, 0, 1)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera2/CameraViewport/Camera3D/Area3D3" unique_id=948277079]
-visible = false
-mesh = SubResource("TubeTrailMesh_0ld40")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Camera2/CameraViewport/Camera3D/Area3D3" unique_id=1054426428]
-visible = false
-mesh = SubResource("TubeTrailMesh_0ld40")
-surface_material_override/0 = ExtResource("1_jyhfs")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Camera2/CameraViewport" unique_id=273323045]
-
-[node name="ColorRect" type="ColorRect" parent="Camera2/CameraViewport/CanvasLayer" unique_id=1307145678]
-material = SubResource("ShaderMaterial_2wyq8")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Camera3" type="Node3D" parent="." unique_id=1427304245]
-
-[node name="CameraViewport" type="SubViewport" parent="Camera3" unique_id=590288516]
-size = Vector2i(640, 480)
-script = ExtResource("3_a8y0u")
-metadata/visual = true
-metadata/audio = false
-
-[node name="Camera3D" type="Camera3D" parent="Camera3/CameraViewport" unique_id=754528297]
-transform = Transform3D(1, 0, 0, 0, 0.90709066, 0.42057645, 0, -0.42057645, 0.90709066, -2, 5, 9)
-current = true
-fov = 108.7
-
-[node name="Area3D3" type="Area3D" parent="Camera3/CameraViewport/Camera3D" unique_id=1547906789]
+[node name="Area3D3" type="Area3D" parent="Room3/CameraViewport/Camera3D" unique_id=1547906789]
 collision_layer = 3
 collision_mask = 524291
 script = ExtResource("8_0ld40")
 metadata/number = 2
 metadata/radio_number = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3/CameraViewport/Camera3D/Area3D3" unique_id=268115411]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room3/CameraViewport/Camera3D/Area3D3" unique_id=268115411]
 shape = SubResource("BoxShape3D_sugp2")
 debug_color = Color(0.9529412, 0.21960784, 0, 1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3/CameraViewport/Camera3D/Area3D3" unique_id=948277080]
-visible = false
-mesh = SubResource("TubeTrailMesh_0ld40")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Camera3/CameraViewport/Camera3D/Area3D3" unique_id=1054426429]
-visible = false
-mesh = SubResource("TubeTrailMesh_0ld40")
-surface_material_override/0 = ExtResource("1_jyhfs")
-
-[node name="blockbench_export" parent="Camera3/CameraViewport/Camera3D/Area3D3" unique_id=1330489305 instance=ExtResource("30_tel4y")]
+[node name="blockbench_export" parent="Room3/CameraViewport/Camera3D/Area3D3" unique_id=1330489305 instance=ExtResource("30_tel4y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2502752, 0.357847)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Camera3/CameraViewport" unique_id=273323046]
+[node name="CanvasLayer" type="CanvasLayer" parent="Room3/CameraViewport" unique_id=273323046]
 
-[node name="ColorRect" type="ColorRect" parent="Camera3/CameraViewport/CanvasLayer" unique_id=1307145679]
-material = SubResource("ShaderMaterial_2wyq8")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Camera4" type="Node3D" parent="." unique_id=1427304246]
-
-[node name="CameraViewport" type="SubViewport" parent="Camera4" unique_id=590288517]
-size = Vector2i(640, 480)
-script = ExtResource("3_a8y0u")
-metadata/visual = true
-metadata/audio = false
-
-[node name="Camera3D" type="Camera3D" parent="Camera4/CameraViewport" unique_id=754528298]
-transform = Transform3D(0.10881478, 0.42646477, -0.89776886, -3.7252903e-09, 0.90313154, 0.4290123, 0.9940621, -0.046682872, 0.09827407, -10.145676, 5.151491, 3.404839)
-current = true
-fov = 108.7
-
-[node name="Area3D3" type="Area3D" parent="Camera4/CameraViewport/Camera3D" unique_id=1547906790]
-collision_layer = 3
-collision_mask = 524291
-script = ExtResource("8_0ld40")
-metadata/number = 3
-metadata/radio_number = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera4/CameraViewport/Camera3D/Area3D3" unique_id=268115412]
-shape = SubResource("BoxShape3D_sugp2")
-debug_color = Color(0.9529412, 0.21960784, 0, 1)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera4/CameraViewport/Camera3D/Area3D3" unique_id=948277081]
-visible = false
-mesh = SubResource("TubeTrailMesh_0ld40")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Camera4/CameraViewport/Camera3D/Area3D3" unique_id=1054426430]
-visible = false
-mesh = SubResource("TubeTrailMesh_0ld40")
-surface_material_override/0 = ExtResource("1_jyhfs")
-
-[node name="blockbench_export" parent="Camera4/CameraViewport/Camera3D/Area3D3" unique_id=997818674 instance=ExtResource("30_tel4y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2502752, 0.357847)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Camera4/CameraViewport" unique_id=273323047]
-
-[node name="ColorRect" type="ColorRect" parent="Camera4/CameraViewport/CanvasLayer" unique_id=1307145680]
-material = SubResource("ShaderMaterial_2wyq8")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Camera5" type="Node3D" parent="." unique_id=1427304247]
-
-[node name="CameraViewport" type="SubViewport" parent="Camera5" unique_id=590288518]
-size = Vector2i(640, 480)
-script = ExtResource("3_a8y0u")
-metadata/visual = true
-metadata/audio = false
-
-[node name="Camera3D" type="Camera3D" parent="Camera5/CameraViewport" unique_id=754528299]
-transform = Transform3D(-0.962256, 0.21531607, -0.1663732, 0.025596991, 0.6802344, 0.73234165, 0.2709395, 0.70044136, -0.6600712, 20.268293, 4.913682, -6.0863194)
-current = true
-fov = 108.7
-
-[node name="Area3D3" type="Area3D" parent="Camera5/CameraViewport/Camera3D" unique_id=1547906791]
-collision_layer = 3
-collision_mask = 524291
-script = ExtResource("8_0ld40")
-metadata/number = 4
-metadata/radio_number = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera5/CameraViewport/Camera3D/Area3D3" unique_id=268115413]
-shape = SubResource("BoxShape3D_sugp2")
-debug_color = Color(0.9529412, 0.21960784, 0, 1)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera5/CameraViewport/Camera3D/Area3D3" unique_id=948277082]
-visible = false
-mesh = SubResource("TubeTrailMesh_0ld40")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Camera5/CameraViewport/Camera3D/Area3D3" unique_id=1054426431]
-visible = false
-mesh = SubResource("TubeTrailMesh_0ld40")
-surface_material_override/0 = ExtResource("1_jyhfs")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Camera5/CameraViewport" unique_id=273323048]
-
-[node name="ColorRect" type="ColorRect" parent="Camera5/CameraViewport/CanvasLayer" unique_id=1307145681]
+[node name="ColorRect" type="ColorRect" parent="Room3/CameraViewport/CanvasLayer" unique_id=1307145679]
 material = SubResource("ShaderMaterial_2wyq8")
 anchors_preset = 15
 anchor_right = 1.0
@@ -827,24 +675,27 @@ grow_vertical = 2
 
 [node name="Shop" parent="." unique_id=919579032 instance=ExtResource("22_shop")]
 
+[node name="blockbench_export" parent="." unique_id=1954461617 instance=ExtResource("39_c6pm6")]
+transform = Transform3D(-0.68384063, 0, -0.14953907, 0, 0.7, 0, 0.14953907, 0, -0.68384063, 0.7531147, 0.04235357, -20.677204)
+
+[node name="blockbench_export2" parent="." unique_id=177537850 instance=ExtResource("40_5he1u")]
+transform = Transform3D(-0.69012374, 0, -0.11717175, 0, 0.7, 0, 0.11717175, 0, -0.69012374, 0.88768494, 0.04235357, -20.268705)
+
+[node name="blockbench_export3" parent="." unique_id=1620599082 instance=ExtResource("41_5poiv")]
+transform = Transform3D(-0.05211384, 0, 1.4990945, 0, 1.5, 0, -1.4990945, 0, -0.05211384, 8.335568, 0.017913342, -19.707079)
+
 [connection signal="clicked_closeup" from="PlayerCam" to="DirectionalLight3D" method="_on_player_cam_clicked_closeup"]
 [connection signal="on_hover_end" from="PlayerCam/Interactor" to="." method="_turn_off"]
 [connection signal="on_hover_start" from="PlayerCam/Interactor" to="." method="_turn_on"]
 [connection signal="on_interact" from="Area3D" to="DirectionalLight3D" method="trigger_cam"]
 [connection signal="on_interact" from="Area3D2" to="DirectionalLight3D" method="trigger_cam"]
 [connection signal="on_interact" from="Area3D3" to="DirectionalLight3D" method="trigger_radio"]
-[connection signal="on_interact" from="PowerSwitch" to="GameModeManager" method="_on_power_switch_interacted"]
+[connection signal="on_interact" from="PowerSwitch" to="GameModeManager/PowerManager" method="_on_power_switch_interacted"]
 [connection signal="on_interact" from="OfficeDoor" to="GameModeManager" method="_on_office_door_interacted"]
 [connection signal="on_interact" from="Area3D4" to="DirectionalLight3D" method="trigger_cam"]
-[connection signal="on_interact" from="Area3D5" to="DirectionalLight3D" method="trigger_cam"]
-[connection signal="on_interact" from="Area3D6" to="DirectionalLight3D" method="trigger_cam"]
 [connection signal="on_hover_end" from="FreeroamController/FreeroamCam/Interactor" to="." method="_turn_off"]
 [connection signal="on_hover_start" from="FreeroamController/FreeroamCam/Interactor" to="." method="_turn_on"]
+[connection signal="on_interact" from="Room/CameraViewport/Camera3D/Area3D3" to="DirectionalLight3D" method="repair_cam"]
+[connection signal="on_interact" from="Room2/CameraViewport/Camera3D/Area3D3" to="DirectionalLight3D" method="repair_cam"]
 [connection signal="on_interact" from="Room3/RadioPlacementSpot" to="GameModeManager" method="_on_radio_place_interacted"]
-[connection signal="on_interact" from="Room4/RadioPlacementSpot" to="GameModeManager" method="_on_radio_place_interacted"]
-[connection signal="on_interact" from="Room5/RadioPlacementSpot" to="GameModeManager" method="_on_radio_place_interacted"]
-[connection signal="on_interact" from="Camera/CameraViewport/Camera3D/Area3D3" to="DirectionalLight3D" method="repair_cam"]
-[connection signal="on_interact" from="Camera2/CameraViewport/Camera3D/Area3D3" to="DirectionalLight3D" method="repair_cam"]
-[connection signal="on_interact" from="Camera3/CameraViewport/Camera3D/Area3D3" to="DirectionalLight3D" method="repair_cam"]
-[connection signal="on_interact" from="Camera4/CameraViewport/Camera3D/Area3D3" to="DirectionalLight3D" method="repair_cam"]
-[connection signal="on_interact" from="Camera5/CameraViewport/Camera3D/Area3D3" to="DirectionalLight3D" method="repair_cam"]
+[connection signal="on_interact" from="Room3/CameraViewport/Camera3D/Area3D3" to="DirectionalLight3D" method="repair_cam"]
